@@ -15,7 +15,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.activity_registration, new RegistrationFragment(), "registrationFragment")
+                    .add(R.id.activity_registration, new RegistrationFragment())
                     .commit();
         }
     }

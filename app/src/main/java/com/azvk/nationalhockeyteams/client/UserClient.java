@@ -11,4 +11,7 @@ public interface UserClient {
 
     @POST("api/logincheck")
     Observable<Boolean> userLogin(@Body User user);
+
+    @POST("api/registrationnew")
+    Observable<String> userRegistration(@Body User user);
 }

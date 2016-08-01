@@ -3,6 +3,7 @@ package com.azvk.nationalhockeyteams.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,14 +47,18 @@ public class LoginFragment extends Fragment {
     void loginButtonClicked(View view){
 
         Log.i(TAG, "onLoginButtonClicked");
-        presenter = new MyPresenter(this);
+
+        presenter = new MyPresenter(this, inputName.getText().toString(), inputPassword.getText().toString());
 
         if (isValid(inputName, inputPassword)){
             Log.i(TAG, "login and password are valid");
-            presenter.loginUser(inputName.getText().toString(), inputPassword.getText().toString());
+            presenter.loginUser();
         }
         else{
             Log.i(TAG, "login and password are NOT valid");
+            Snackbar.make(view, R.string.empty_error,
+                    Snackbar.LENGTH_SHORT)
+                    .show();
         }
     }
 

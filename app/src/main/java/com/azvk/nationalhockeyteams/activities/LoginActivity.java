@@ -15,7 +15,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.activity_login, new LoginFragment(), "loginFragment")
+                    .add(R.id.activity_login, new LoginFragment())
                     .commit();
         }
     }
