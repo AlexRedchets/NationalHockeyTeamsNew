@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.azvk.nationalhockeyteams.MyPresenter;
+import com.azvk.nationalhockeyteams.presenters.UserPresenter;
 import com.azvk.nationalhockeyteams.R;
 
 import butterknife.BindView;
@@ -27,7 +27,7 @@ public class RegistrationFragment extends Fragment{
     @BindView(R.id.input_repassword_reg)
     EditText inputRePassword;
 
-    MyPresenter presenter;
+    UserPresenter presenter;
     private static final String TAG = RegistrationFragment.class.getSimpleName();
 
     public RegistrationFragment() {
@@ -42,7 +42,7 @@ public class RegistrationFragment extends Fragment{
     }
 
     @OnClick(R.id.signup_button_reg)
-    public void signUp(View view){
+    void signUp(View view){
         switch (isValid(inputName, inputPassword, inputRePassword)){
             case 0:
                 Log.i(TAG, "login and password are NOT valid");
@@ -58,7 +58,7 @@ public class RegistrationFragment extends Fragment{
                 break;
             case 2:
                 Log.i(TAG, "Input info is valid");
-                presenter = new MyPresenter(this, inputName.getText().toString(), inputPassword.getText().toString());
+                presenter = new UserPresenter(this, inputName.getText().toString(), inputPassword.getText().toString());
                 presenter.registrationUser();
                 break;
         }

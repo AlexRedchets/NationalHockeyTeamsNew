@@ -1,7 +1,8 @@
-package com.azvk.nationalhockeyteams;
+package com.azvk.nationalhockeyteams.presenters;
 
 import android.util.Log;
 
+import com.azvk.nationalhockeyteams.Generator;
 import com.azvk.nationalhockeyteams.client.UserClient;
 import com.azvk.nationalhockeyteams.fragments.LoginFragment;
 import com.azvk.nationalhockeyteams.fragments.RegistrationFragment;
@@ -12,19 +13,19 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 
-public class MyPresenter {
+public class UserPresenter {
 
-    private static final String TAG = MyPresenter.class.getSimpleName();
+    private static final String TAG = UserPresenter.class.getSimpleName();
     private LoginFragment loginView;
     private RegistrationFragment registrationView;
     private User user;
 
-    public MyPresenter(LoginFragment view, String username, String password) {
+    public UserPresenter(LoginFragment view, String username, String password) {
         loginView = view;
         user = new User(username, password);
     }
 
-    public MyPresenter(RegistrationFragment view, String username, String password) {
+    public UserPresenter(RegistrationFragment view, String username, String password) {
         registrationView = view;
         user = new User(username, password);
     }

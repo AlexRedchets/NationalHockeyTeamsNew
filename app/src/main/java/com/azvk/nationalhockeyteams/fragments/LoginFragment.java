@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.azvk.nationalhockeyteams.MyPresenter;
+import com.azvk.nationalhockeyteams.presenters.UserPresenter;
 import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.activities.RegistrationActivity;
 
@@ -24,7 +24,7 @@ public class LoginFragment extends Fragment {
 
     private  static final String TAG = LoginFragment.class.getSimpleName();
 
-    MyPresenter presenter;
+    UserPresenter presenter;
     @BindView(R.id.input_name_login)
     EditText inputName;
     @BindView(R.id.input_password_login)
@@ -48,7 +48,7 @@ public class LoginFragment extends Fragment {
 
         Log.i(TAG, "onLoginButtonClicked");
 
-        presenter = new MyPresenter(this, inputName.getText().toString(), inputPassword.getText().toString());
+        presenter = new UserPresenter(this, inputName.getText().toString(), inputPassword.getText().toString());
 
         if (isValid(inputName, inputPassword)){
             Log.i(TAG, "login and password are valid");
