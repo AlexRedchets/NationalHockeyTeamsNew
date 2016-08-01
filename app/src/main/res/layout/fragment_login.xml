@@ -30,27 +30,30 @@
             android:id="@+id/input_layout_name_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:hint="@string/hint_username">
 
             <EditText
                 android:id="@+id/input_name_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:hint="@string/hint_username" />
+                android:inputType="text"
+                tools:ignore="LabelFor" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_password_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_password" >
 
             <EditText
                 android:id="@+id/input_password_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="@string/hint_password" />
+                tools:ignore="LabelFor" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
