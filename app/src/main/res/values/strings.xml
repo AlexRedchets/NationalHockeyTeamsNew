@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">National Hockey Teams</string>
+    <string name="registration_activity_title">Registration</string>
+
+    <string name="action_settings">Settings</string>
+    <!--Login and Regestration Activity-->
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_repassword">Re-enter password</string>
+    <string name="login_content_description">Stick and puck</string>
+    <string name="btn_log_in">Log In</string>
+    <string name="btn_sign_up">Sign Up</string>
+
+
+
+    <string name="err_msg_name">Enter your full name</string>
+    <string name="err_msg_email">Enter valid email address</string>
+    <string name="err_msg_password">Enter the password</string>
+</resources>
