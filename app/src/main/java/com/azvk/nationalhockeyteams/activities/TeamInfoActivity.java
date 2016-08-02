@@ -1,4 +1,4 @@
-package com.azvk.nationalhockeyteams;
+package com.azvk.nationalhockeyteams.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.adapters.ViewPagerAdapter;
 
 import butterknife.BindView;
@@ -48,6 +49,7 @@ public class TeamInfoActivity extends AppCompatActivity
         fragmentPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         assert viewPager != null;
         viewPager.setAdapter(fragmentPagerAdapter);
+
     }
 
     @Override

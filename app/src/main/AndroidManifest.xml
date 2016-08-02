@@ -27,7 +27,7 @@
                 android:value=".activities.LoginActivity" />
         </activity>
         <activity
-            android:name=".TeamInfoActivity"
+            android:name=".activities.TeamInfoActivity"
             android:label="@string/title_activity_team_info"
             android:theme="@style/MyMaterialTheme.NoActionBar">
             <intent-filter>

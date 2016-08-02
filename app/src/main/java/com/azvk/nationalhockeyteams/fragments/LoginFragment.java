@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.azvk.nationalhockeyteams.TeamInfoActivity;
+import com.azvk.nationalhockeyteams.activities.TeamInfoActivity;
 import com.azvk.nationalhockeyteams.presenters.UserPresenter;
 import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.activities.RegistrationActivity;

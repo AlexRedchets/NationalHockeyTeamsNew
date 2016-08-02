@@ -27,4 +27,13 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 2;
     }
+
+    // Returns the page title for the top indicator
+    @Override
+    public CharSequence getPageTitle(int position) {
+        if (position==0)
+            return "INFORMATION";
+        else
+            return "PLAYERS";
+    }
 }

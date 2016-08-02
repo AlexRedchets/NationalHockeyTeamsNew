@@ -5,6 +5,6 @@
     android:id="@+id/content_team_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.azvk.nationalhockeyteams.TeamInfoActivity"
+    tools:context="com.azvk.nationalhockeyteams.activities.TeamInfoActivity"
     tools:showIn="@layout/app_bar_team_info">
 </RelativeLayout>

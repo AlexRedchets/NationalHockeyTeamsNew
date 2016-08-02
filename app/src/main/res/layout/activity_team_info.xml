@@ -8,6 +8,24 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="64dp">
+            <android.support.v4.view.PagerTabStrip
+                android:id="@+id/pager_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"/>
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+
     <include
         layout="@layout/app_bar_team_info"
         android:layout_width="match_parent"
@@ -21,11 +39,5 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_team_info"
         app:menu="@menu/activity_team_info_drawer" />
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="64dp">
-    </android.support.v4.view.ViewPager>
 
 </android.support.v4.widget.DrawerLayout>
