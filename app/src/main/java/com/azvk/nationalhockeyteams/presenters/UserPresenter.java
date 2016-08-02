@@ -69,7 +69,7 @@ public class UserPresenter {
                                     Log.i(TAG, "Error on save");
                                     registrationView.errorOnSave();
                                     break;
-                                default:
+                                case "2":
                                     Log.i(TAG, "User added");
                                     registrationView.userAdded();
                                     break;

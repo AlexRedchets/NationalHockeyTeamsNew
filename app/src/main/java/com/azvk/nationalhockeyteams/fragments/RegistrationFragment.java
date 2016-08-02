@@ -1,5 +1,6 @@
 package com.azvk.nationalhockeyteams.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.azvk.nationalhockeyteams.TeamInfoActivity;
 import com.azvk.nationalhockeyteams.presenters.UserPresenter;
 import com.azvk.nationalhockeyteams.R;
 
@@ -88,5 +90,7 @@ public class RegistrationFragment extends Fragment{
 
     public void userAdded(){
         Toast.makeText(getContext(), "userAdded", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getContext(), TeamInfoActivity.class);
+        startActivity(intent);
     }
 }

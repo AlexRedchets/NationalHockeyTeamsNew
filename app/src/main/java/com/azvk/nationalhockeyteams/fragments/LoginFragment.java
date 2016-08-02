@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.azvk.nationalhockeyteams.TeamInfoActivity;
 import com.azvk.nationalhockeyteams.presenters.UserPresenter;
 import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.activities.RegistrationActivity;
@@ -76,6 +77,8 @@ public class LoginFragment extends Fragment {
     public void userAuthSuccess(boolean user){
         if (user){
             Toast.makeText(getContext(), "User found", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), TeamInfoActivity.class);
+            startActivity(intent);
         }
         else {
             Toast.makeText(getContext(), "User NOT found", Toast.LENGTH_SHORT).show();

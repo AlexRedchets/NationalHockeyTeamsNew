@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.azvk.nationalhockeyteams">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,9 +12,9 @@
         android:theme="@style/MyMaterialTheme">
         <activity
             android:name=".activities.LoginActivity"
-            android:windowSoftInputMode="stateHidden|adjustUnspecified"
+            android:launchMode="singleTop"
             android:theme="@style/MyMaterialThemeNoActionBar"
-            android:launchMode="singleTop">
+            android:windowSoftInputMode="stateHidden|adjustUnspecified">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,12 +23,17 @@
         </activity>
         <activity
             android:name=".activities.RegistrationActivity"
+            android:label="@string/registration_activity_title"
             android:parentActivityName=".activities.LoginActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan"
-            android:label="@string/registration_activity_title">
+            android:windowSoftInputMode="stateHidden|adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.LoginActivity" />
         </activity>
+        <activity
+            android:name=".TeamInfoActivity"
+            android:label="@string/title_activity_team_info"
+            android:theme="@style/MyMaterialTheme.NoActionBar"></activity>
     </application>
+
 </manifest>
