@@ -1,6 +1,9 @@
 package com.azvk.nationalhockeyteams.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -45,24 +48,32 @@ public class RegistrationFragment extends Fragment{
 
     @OnClick(R.id.signup_button_reg)
     void signUp(View view){
-        switch (isValid(inputName, inputPassword, inputRePassword)){
-            case 0:
-                Log.i(TAG, "login and password are NOT valid");
-                Snackbar.make(view, R.string.empty_error,
-                        Snackbar.LENGTH_SHORT)
-                        .show();
-                break;
-            case 1:
-                Log.i(TAG, "passwords do not match");
-                Snackbar.make(view, R.string.passwords_error,
-                        Snackbar.LENGTH_SHORT)
-                        .show();
-                break;
-            case 2:
-                Log.i(TAG, "Input info is valid");
-                presenter = new UserPresenter(this, inputName.getText().toString(), inputPassword.getText().toString());
-                presenter.registrationUser();
-                break;
+        if (isNetworkAvailable()){
+            //if there is internet connection
+            switch (isValid(inputName, inputPassword, inputRePassword)){
+                case 0:
+                    Log.i(TAG, "login and password are NOT valid");
+                    Snackbar.make(view, R.string.empty_error,
+                            Snackbar.LENGTH_SHORT)
+                            .show();
+                    break;
+                case 1:
+                    Log.i(TAG, "passwords do not match");
+                    Snackbar.make(view, R.string.passwords_error,
+                            Snackbar.LENGTH_SHORT)
+                            .show();
+                    break;
+                case 2:
+                    Log.i(TAG, "Input info is valid");
+                    presenter = new UserPresenter(this, inputName.getText().toString(), inputPassword.getText().toString());
+                    presenter.registrationUser();
+                    break;
+            }
+        }else{
+            //if there is not internet connection
+            Snackbar.make(view, R.string.network_error,
+                    Snackbar.LENGTH_SHORT)
+                    .show();
         }
     }
 
@@ -92,5 +103,12 @@ public class RegistrationFragment extends Fragment{
         Toast.makeText(getContext(), "userAdded", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getContext(), TeamInfoActivity.class);
         startActivity(intent);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

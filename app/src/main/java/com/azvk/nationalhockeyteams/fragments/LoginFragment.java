@@ -1,6 +1,9 @@
 package com.azvk.nationalhockeyteams.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -49,18 +52,27 @@ public class LoginFragment extends Fragment {
 
         Log.i(TAG, "onLoginButtonClicked");
 
-        presenter = new UserPresenter(this, inputName.getText().toString(), inputPassword.getText().toString());
-
-        if (isValid(inputName, inputPassword)){
-            Log.i(TAG, "login and password are valid");
-            presenter.loginUser();
+        if(isNetworkAvailable()){
+            //if there is internet connection
+            if (isValid(inputName, inputPassword)){
+                Log.i(TAG, "login and password are valid");
+                presenter = new UserPresenter(this, inputName.getText().toString(), inputPassword.getText().toString());
+                presenter.loginUser();
+            }
+            else{
+                Log.i(TAG, "login and password are NOT valid");
+                Snackbar.make(view, R.string.empty_error,
+                        Snackbar.LENGTH_SHORT)
+                        .show();
+            }
         }
         else{
-            Log.i(TAG, "login and password are NOT valid");
-            Snackbar.make(view, R.string.empty_error,
+            //if there is not internet connection
+            Snackbar.make(view, R.string.network_error,
                     Snackbar.LENGTH_SHORT)
                     .show();
         }
+
     }
 
     @OnClick(R.id.signup_button_login)
@@ -83,5 +95,12 @@ public class LoginFragment extends Fragment {
         else {
             Toast.makeText(getContext(), "User NOT found", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
