@@ -16,11 +16,6 @@
             android:launchMode="singleTop"
             android:theme="@style/MyMaterialThemeNoActionBar"
             android:windowSoftInputMode="stateHidden|adjustUnspecified">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activities.RegistrationActivity"
@@ -34,7 +29,13 @@
         <activity
             android:name=".TeamInfoActivity"
             android:label="@string/title_activity_team_info"
-            android:theme="@style/MyMaterialTheme.NoActionBar"></activity>
+            android:theme="@style/MyMaterialTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
