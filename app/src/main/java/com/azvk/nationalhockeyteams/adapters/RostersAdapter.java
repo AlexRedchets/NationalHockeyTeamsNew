@@ -15,6 +15,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class RostersAdapter extends RecyclerView.Adapter<RostersAdapter.ViewHolder>{
 
     private List<Rosters> listRosters;
@@ -67,15 +70,14 @@ public class RostersAdapter extends RecyclerView.Adapter<RostersAdapter.ViewHold
 
 
     protected static class ViewHolder extends RecyclerView.ViewHolder{
-
+        @BindView(R.id.player_name)
         TextView playerName;
+        @BindView(R.id.player_image)
         ImageView playerImage;
 
         private ViewHolder(View itemView) {
             super(itemView);
-
-            playerImage = (ImageView)itemView.findViewById(R.id.player_image);
-            playerName = (TextView)itemView.findViewById(R.id.player_name);
+            ButterKnife.bind(this, itemView);
         }
     }
 

@@ -49,7 +49,6 @@ public class TeamInfoActivity extends AppCompatActivity
         fragmentPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         assert viewPager != null;
         viewPager.setAdapter(fragmentPagerAdapter);
-
     }
 
     @Override

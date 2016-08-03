@@ -24,10 +24,6 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     private RecyclerView recyclerView;
     private RostersAdapter rostersAdapter;
     RostersInterface.ViewPresenterInterface viewPresenterInterface;
-    private List<Rosters> rostersList;
-
-    public RostersFragment() {
-    }
 
     public static RostersFragment newInstance(){
         return new RostersFragment();
@@ -37,19 +33,20 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.i(TAG, "onCreateView started");
-        View view = inflater.inflate(R.layout.fragment_rosters, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_rosters, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        Log.i(TAG, "onViewCreated started");
         super.onViewCreated(view, savedInstanceState);
+
         recyclerView = (RecyclerView)view.findViewById(R.id.recycle_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         rostersAdapter = new RostersAdapter(getActivity()) ;
         recyclerView.setAdapter(rostersAdapter);
-        rostersAdapter.updateAdapter(rostersList);
+
         viewPresenterInterface = new RostersPresenter();
         viewPresenterInterface.getRoster();
     }
@@ -57,6 +54,6 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     @Override
     public void returnRosters(List<Rosters> rosters) {
         Log.i(TAG, "returnRosters started");
-        rostersList = rosters;
+        rostersAdapter.updateAdapter(rosters);
     }
 }

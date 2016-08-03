@@ -1,6 +1,8 @@
 package com.azvk.nationalhockeyteams.models;
 
+import android.content.Context;
 import android.util.Log;
+import android.view.View;
 
 import com.azvk.nationalhockeyteams.Generator;
 import com.azvk.nationalhockeyteams.client.RostersClient;
@@ -16,8 +18,8 @@ import rx.schedulers.Schedulers;
 public class RostersModel implements RostersInterface.PresenterModelInterface {
 
     private static final String TAG = RostersModel.class.getSimpleName();
-    List<Rosters> rosters;
-    RostersInterface.ModelPresenterInterface modelPresenterInterface;
+    private List<Rosters> rosters;
+    private RostersInterface.ModelPresenterInterface modelPresenterInterface;
 
     @Override
     public void downloadRosters() {
