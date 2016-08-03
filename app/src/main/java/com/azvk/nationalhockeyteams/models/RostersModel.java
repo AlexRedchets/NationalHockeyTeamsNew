@@ -19,7 +19,12 @@ public class RostersModel implements RostersInterface.PresenterModelInterface {
 
     private static final String TAG = RostersModel.class.getSimpleName();
     private List<Rosters> rosters;
-    private RostersInterface.ModelPresenterInterface modelPresenterInterface;
+    private RostersInterface.ModelPresenterInterface view;
+
+
+    public RostersModel(RostersInterface.ModelPresenterInterface view) {
+        this.view = view;
+    }
 
     @Override
     public void downloadRosters() {
@@ -32,8 +37,7 @@ public class RostersModel implements RostersInterface.PresenterModelInterface {
                 .subscribe(rostersData -> {
                     Log.i(TAG, "COOL");
                     rosters = rostersData;
-                    modelPresenterInterface = new RostersPresenter();
-                    modelPresenterInterface.returnRosters(rosters);
+                    view.returnRosters(rosters);
                 },
                         throwable -> Log.e("Error", throwable.getMessage()));
     }

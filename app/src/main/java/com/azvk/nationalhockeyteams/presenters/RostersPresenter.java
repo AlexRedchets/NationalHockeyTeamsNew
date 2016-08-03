@@ -1,6 +1,5 @@
 package com.azvk.nationalhockeyteams.presenters;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.View;
 
@@ -16,11 +15,17 @@ public class RostersPresenter implements RostersInterface.ViewPresenterInterface
     private static final String TAG = RostersPresenter.class.getSimpleName();
     private RostersInterface.PresenterModelInterface presenterModelInterface;
     private RostersInterface.PresenterViewInterface presenterViewInterface;
+    RostersInterface.PresenterViewInterface view;
+
+
+    public RostersPresenter(RostersInterface.PresenterViewInterface view) {
+        this.view = view;
+        presenterModelInterface = new RostersModel(this);
+    }
 
     @Override
     public void getRoster() {
         Log.i(TAG, "getRoster started");
-        presenterModelInterface = new RostersModel();
         presenterModelInterface.downloadRosters();
     }
 
@@ -28,7 +33,8 @@ public class RostersPresenter implements RostersInterface.ViewPresenterInterface
     @Override
     public void returnRosters(List<Rosters> rosters) {
         Log.i(TAG, "returnRosters");
-        presenterViewInterface = new RostersFragment();
-        presenterViewInterface.returnRosters(rosters);
+        if (view != null) {
+            view.returnRosters(rosters);
+        }
     }
 }

@@ -25,8 +25,16 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     private RostersAdapter rostersAdapter;
     RostersInterface.ViewPresenterInterface viewPresenterInterface;
 
+
     public static RostersFragment newInstance(){
         return new RostersFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewPresenterInterface = new RostersPresenter(this);
+        viewPresenterInterface.getRoster();
     }
 
     @Nullable
@@ -44,11 +52,8 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         recyclerView = (RecyclerView)view.findViewById(R.id.recycle_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        rostersAdapter = new RostersAdapter(getActivity()) ;
+        rostersAdapter = new RostersAdapter(getContext()) ;
         recyclerView.setAdapter(rostersAdapter);
-
-        viewPresenterInterface = new RostersPresenter();
-        viewPresenterInterface.getRoster();
     }
 
     @Override
