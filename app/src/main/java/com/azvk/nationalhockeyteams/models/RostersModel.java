@@ -4,8 +4,7 @@ import android.util.Log;
 
 import com.azvk.nationalhockeyteams.Generator;
 import com.azvk.nationalhockeyteams.client.RostersClient;
-import com.azvk.nationalhockeyteams.interfaces.ModelPresenterInterface;
-import com.azvk.nationalhockeyteams.interfaces.PresenterModelInterface;
+import com.azvk.nationalhockeyteams.interfaces.RostersInterface;
 import com.azvk.nationalhockeyteams.presenters.RostersPresenter;
 
 import java.util.List;
@@ -14,11 +13,11 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class RostersModel implements PresenterModelInterface {
+public class RostersModel implements RostersInterface.PresenterModelInterface {
 
     private static final String TAG = RostersModel.class.getSimpleName();
     List<Rosters> rosters;
-    ModelPresenterInterface modelPresenterInterface;
+    RostersInterface.ModelPresenterInterface modelPresenterInterface;
 
     @Override
     public void downloadRosters() {
