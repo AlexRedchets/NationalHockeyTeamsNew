@@ -1,31 +1,38 @@
 package com.azvk.nationalhockeyteams.presenters;
 
-import android.provider.Settings;
 import android.util.Log;
 
-import com.azvk.nationalhockeyteams.Generator;
-import com.azvk.nationalhockeyteams.client.RostersClient;
-import com.azvk.nationalhockeyteams.client.UserClient;
+import com.azvk.nationalhockeyteams.fragments.RostersFragment;
+import com.azvk.nationalhockeyteams.interfaces.ModelPresenterInterface;
+import com.azvk.nationalhockeyteams.interfaces.PresenterViewInterface;
+import com.azvk.nationalhockeyteams.interfaces.ViewPresenterInterface;
+import com.azvk.nationalhockeyteams.interfaces.PresenterModelInterface;
 import com.azvk.nationalhockeyteams.models.Rosters;
+import com.azvk.nationalhockeyteams.models.RostersModel;
 
 import java.util.List;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-
-public class RostersPresenter {
+public class RostersPresenter implements ViewPresenterInterface, ModelPresenterInterface {
 
     private static final String TAG = RostersPresenter.class.getSimpleName();
+    PresenterModelInterface presenterModelInterface;
+    PresenterViewInterface presenterViewInterface;
 
     public RostersPresenter() {
-        Rosters rosters = new Rosters();
-        RostersClient rostersClient = Generator.createService(RostersClient.class);
-        Observable<List<Rosters>> rostersObservable = rostersClient.rosters("Russia");
-        rostersObservable
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(rostersData -> System.out.print("COOL"),
-                        throwable -> Log.e("Error", throwable.getMessage()));
+    }
+
+    @Override
+    public void getRoster() {
+        Log.i(TAG, "getRoster started");
+        presenterModelInterface = new RostersModel();
+        presenterModelInterface.downloadRosters();
+    }
+
+
+    @Override
+    public void returnRosters(List<Rosters> rosters) {
+        Log.i(TAG, "returnRosters");
+        presenterViewInterface = new RostersFragment();
+        presenterViewInterface.returnRosters(rosters);
     }
 }
