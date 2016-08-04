@@ -1,13 +1,10 @@
 package com.azvk.nationalhockeyteams.models;
 
-import android.content.Context;
 import android.util.Log;
-import android.view.View;
 
 import com.azvk.nationalhockeyteams.Generator;
 import com.azvk.nationalhockeyteams.client.RostersClient;
 import com.azvk.nationalhockeyteams.interfaces.RostersInterface;
-import com.azvk.nationalhockeyteams.presenters.RostersPresenter;
 
 import java.util.List;
 

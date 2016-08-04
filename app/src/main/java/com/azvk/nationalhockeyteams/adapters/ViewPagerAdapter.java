@@ -17,9 +17,12 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
 
-            case 0: return  TeamInfoFragment.newInstance();
-            case 1: return RostersFragment.newInstance();
-            default: return null;
+            case 0:
+                return TeamInfoFragment.newInstance();
+            case 1:
+                return RostersFragment.newInstance();
+            default:
+                return null;
         }
     }
 

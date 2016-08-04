@@ -31,10 +31,8 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        viewPresenterInterface = new RostersPresenter(this);
-        viewPresenterInterface.getRoster();
+    public void onSaveInstanceState(final Bundle outState) {
+        //super.onSaveInstanceState(outState);
     }
 
     @Nullable
@@ -54,6 +52,9 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         recyclerView.setLayoutManager(layoutManager);
         rostersAdapter = new RostersAdapter(getContext()) ;
         recyclerView.setAdapter(rostersAdapter);
+
+        viewPresenterInterface = new RostersPresenter(this);
+        viewPresenterInterface.getRoster();
     }
 
     @Override
