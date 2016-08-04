@@ -56,7 +56,7 @@ public class TeamInfoActivity extends AppCompatActivity
         //Activate viewPager
         fragmentPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(fragmentPagerAdapter);
-
+/*
         if (savedInstanceState == null){
             NetworkState networkState = new NetworkState(this);
             if (!networkState.isNetworkAvailable()){
@@ -64,7 +64,7 @@ public class TeamInfoActivity extends AppCompatActivity
                         Snackbar.LENGTH_LONG)
                         .show();
             }
-        }
+        }*/
     }
 
     @Override

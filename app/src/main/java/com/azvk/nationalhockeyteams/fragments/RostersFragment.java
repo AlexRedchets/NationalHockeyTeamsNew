@@ -32,9 +32,6 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     private RostersAdapter rostersAdapter;
     RostersInterface.ViewPresenterInterface viewPresenterInterface;
 
-    private Realm realm;
-    List<Roster> rosterList;
-
     public static RostersFragment newInstance(){
         return new RostersFragment();
     }
@@ -52,9 +49,6 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         rostersAdapter = new RostersAdapter(getContext()) ;
         recyclerView.setAdapter(rostersAdapter);
 
-        RealmState realmState = new RealmState(getContext());
-        realm = realmState.getRealm();
-
         return view;
     }
 
@@ -62,8 +56,6 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         Log.i(TAG, "onViewCreated started");
         super.onViewCreated(view, savedInstanceState);
-
-        rosterList = realm.where(Roster.class).findAll();
 
         if (savedInstanceState == null){
             Log.i(TAG, "savedInstanceState == null");
@@ -75,15 +67,15 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
             }
             else if (!rosterList.isEmpty()){
                 Log.i(TAG, "realm != null");
-                List<Roster> rosterList = realm.where(Roster.class).findAll();
                 rostersAdapter.updateAdapter(rosterList);
             }
             else{
-                Toast.makeText(getContext(), R.string.network_error, Toast.LENGTH_SHORT).show();
+                Snackbar.make(view, R.string.network_error,
+                        Snackbar.LENGTH_LONG)
+                        .show();
             }
         }
         else{
-            List<Roster> rosterList = realm.where(Roster.class).findAll();
             rostersAdapter.updateAdapter(rosterList);
         }
     }
@@ -92,12 +84,12 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     public void returnRosters(List<Roster> rosters) {
         Log.i(TAG, "returnRosters started");
 
-        realm.beginTransaction();
+        /*realm.beginTransaction();
         if (realm != null){
             realm.deleteAll();
         }
         realm.copyToRealmOrUpdate(rosters);
-        realm.commitTransaction();
+        realm.commitTransaction();*/
 
         rostersAdapter.updateAdapter(rosters);
     }

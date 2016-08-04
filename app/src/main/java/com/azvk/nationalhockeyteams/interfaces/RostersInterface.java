@@ -17,9 +17,12 @@ public interface RostersInterface {
 
     }
 
+
+
     interface PresenterModelInterface {
 
         void downloadRosters();
+        void downloadRostersFromDB();
 
     }
 

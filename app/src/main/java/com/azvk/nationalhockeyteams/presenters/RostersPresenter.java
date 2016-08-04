@@ -12,7 +12,6 @@ public class RostersPresenter implements RostersInterface.ViewPresenterInterface
 
     private static final String TAG = RostersPresenter.class.getSimpleName();
     private RostersInterface.PresenterModelInterface presenterModelInterface;
-    private RostersInterface.PresenterViewInterface presenterViewInterface;
     RostersInterface.PresenterViewInterface view;
 
 
@@ -25,6 +24,12 @@ public class RostersPresenter implements RostersInterface.ViewPresenterInterface
     public void getRoster() {
         Log.i(TAG, "getRoster started");
         presenterModelInterface.downloadRosters();
+    }
+
+    @Override
+    public void getRosterFromDB() {
+        Log.i(TAG, "getRosterFromDB started");
+        presenterModelInterface.downloadRostersFromDB();
     }
 
 
