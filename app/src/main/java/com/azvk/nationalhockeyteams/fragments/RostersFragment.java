@@ -25,14 +25,8 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     private RostersAdapter rostersAdapter;
     RostersInterface.ViewPresenterInterface viewPresenterInterface;
 
-
     public static RostersFragment newInstance(){
         return new RostersFragment();
-    }
-
-    @Override
-    public void onSaveInstanceState(final Bundle outState) {
-        //super.onSaveInstanceState(outState);
     }
 
     @Nullable

@@ -14,7 +14,6 @@ import android.view.MenuItem;
 
 import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.adapters.ViewPagerAdapter;
-import com.azvk.nationalhockeyteams.fragments.RostersFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,6 +47,7 @@ public class TeamInfoActivity extends AppCompatActivity
         //Activate viewPager
         ViewPager viewPager = (ViewPager)findViewById(R.id.view_pager);
         fragmentPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        assert viewPager != null;
         viewPager.setAdapter(fragmentPagerAdapter);
     }
 
