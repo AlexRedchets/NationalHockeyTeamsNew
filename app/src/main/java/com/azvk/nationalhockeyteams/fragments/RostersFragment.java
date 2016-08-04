@@ -13,10 +13,13 @@ import android.view.ViewGroup;
 import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.adapters.RostersAdapter;
 import com.azvk.nationalhockeyteams.interfaces.RostersInterface;
-import com.azvk.nationalhockeyteams.models.Rosters;
+import com.azvk.nationalhockeyteams.models.Roster;
 import com.azvk.nationalhockeyteams.presenters.RostersPresenter;
 
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class RostersFragment extends Fragment implements RostersInterface.PresenterViewInterface {
 
@@ -24,6 +27,9 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     private RecyclerView recyclerView;
     private RostersAdapter rostersAdapter;
     RostersInterface.ViewPresenterInterface viewPresenterInterface;
+
+    private Realm realm;
+    private RealmConfiguration realmConfig;
 
     public static RostersFragment newInstance(){
         return new RostersFragment();
@@ -46,14 +52,40 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         recyclerView.setLayoutManager(layoutManager);
         rostersAdapter = new RostersAdapter(getContext()) ;
         recyclerView.setAdapter(rostersAdapter);
+        if (savedInstanceState == null){
+            Log.i(TAG, "savedInstanceState == null");
+            viewPresenterInterface = new RostersPresenter(this);
+            viewPresenterInterface.getRoster();
+        }
+        else{
 
-        viewPresenterInterface = new RostersPresenter(this);
-        viewPresenterInterface.getRoster();
+            realmConfig = new RealmConfiguration
+                    .Builder(getContext())
+                    .deleteRealmIfMigrationNeeded()
+                    .build();
+            realm = Realm.getInstance(realmConfig);
+            List<Roster> rosterList = realm.where(Roster.class).findAll();
+            rostersAdapter.updateAdapter(rosterList);
+
+        }
     }
 
     @Override
-    public void returnRosters(List<Rosters> rosters) {
+    public void returnRosters(List<Roster> rosters) {
         Log.i(TAG, "returnRosters started");
+        realmConfig = new RealmConfiguration
+                .Builder(getContext())
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        realm = Realm.getInstance(realmConfig);
+        realm.beginTransaction();
+        if (realm!=null){
+            realm.deleteAll();
+        }
+        realm.copyToRealmOrUpdate(rosters);
+        realm.commitTransaction();
+
+
         rostersAdapter.updateAdapter(rosters);
     }
 }

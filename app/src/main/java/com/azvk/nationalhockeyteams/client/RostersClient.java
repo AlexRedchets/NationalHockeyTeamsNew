@@ -1,6 +1,6 @@
 package com.azvk.nationalhockeyteams.client;
 
-import com.azvk.nationalhockeyteams.models.Rosters;
+import com.azvk.nationalhockeyteams.models.Roster;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import rx.Observable;
 public interface RostersClient {
 
     @GET("api/player/{team}")
-    Observable<List<Rosters>> rosters(
+    Observable<List<Roster>> rosters(
             @Path("team") String team
     );
 }

@@ -1,11 +1,9 @@
 package com.azvk.nationalhockeyteams.presenters;
 
 import android.util.Log;
-import android.view.View;
 
-import com.azvk.nationalhockeyteams.fragments.RostersFragment;
 import com.azvk.nationalhockeyteams.interfaces.RostersInterface;
-import com.azvk.nationalhockeyteams.models.Rosters;
+import com.azvk.nationalhockeyteams.models.Roster;
 import com.azvk.nationalhockeyteams.models.RostersModel;
 
 import java.util.List;
@@ -31,7 +29,7 @@ public class RostersPresenter implements RostersInterface.ViewPresenterInterface
 
 
     @Override
-    public void returnRosters(List<Rosters> rosters) {
+    public void returnRosters(List<Roster> rosters) {
         Log.i(TAG, "returnRosters");
         if (view != null) {
             view.returnRosters(rosters);

@@ -1,7 +1,6 @@
 package com.azvk.nationalhockeyteams.interfaces;
 
-import com.azvk.nationalhockeyteams.fragments.RostersFragment;
-import com.azvk.nationalhockeyteams.models.Rosters;
+import com.azvk.nationalhockeyteams.models.Roster;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ public interface RostersInterface {
 
     interface PresenterViewInterface {
 
-        void returnRosters(List<Rosters> rosters);
+        void returnRosters(List<Roster> rosters);
 
     }
 
@@ -26,7 +25,7 @@ public interface RostersInterface {
 
     interface ModelPresenterInterface {
 
-        void returnRosters(List<Rosters> rosters);
+        void returnRosters(List<Roster> rosters);
 
     }
 }

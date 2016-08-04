@@ -15,7 +15,7 @@ import rx.schedulers.Schedulers;
 public class RostersModel implements RostersInterface.PresenterModelInterface {
 
     private static final String TAG = RostersModel.class.getSimpleName();
-    private List<Rosters> rosters;
+    private List<Roster> rosters;
     private RostersInterface.ModelPresenterInterface view;
 
 
@@ -27,7 +27,7 @@ public class RostersModel implements RostersInterface.PresenterModelInterface {
     public void downloadRosters() {
         Log.i(TAG, "downloadRosters started");
         RostersClient rostersClient = Generator.createService(RostersClient.class);
-        Observable<List<Rosters>> rostersObservable = rostersClient.rosters("Russia");
+        Observable<List<Roster>> rostersObservable = rostersClient.rosters("Russia");
         rostersObservable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

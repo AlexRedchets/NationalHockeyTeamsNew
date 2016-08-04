@@ -1,19 +1,25 @@
 package com.azvk.nationalhockeyteams.models;
 
-public class Rosters{
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-        private String name;
-        private String team;
-        private String position;
-        private String birthdate;
-        private String birthplace;
-        private int number;
-        private int weight;
-        private int height;
-        private String imageUrl;
-        private String national_team;
+public class Roster extends RealmObject{
 
-    public Rosters(String birthdate, String birthplace, int height, String imageUrl, String name, String national_team, int number, String position, String team, int weight) {
+    @PrimaryKey
+    private String name;
+    private String team;
+    private String position;
+    private String birthdate;
+    private String birthplace;
+    private int number;
+    private int weight;
+    private int height;
+    private String imageUrl;
+    private String national_team;
+
+    public Roster(){}
+
+    public Roster(String birthdate, String birthplace, int height, String imageUrl, String name, String national_team, int number, String position, String team, int weight) {
         this.birthdate = birthdate;
         this.birthplace = birthplace;
         this.height = height;
