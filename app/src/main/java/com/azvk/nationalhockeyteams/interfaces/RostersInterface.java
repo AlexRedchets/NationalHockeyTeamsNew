@@ -5,30 +5,35 @@ import com.azvk.nationalhockeyteams.models.Roster;
 import java.util.List;
 
 public interface RostersInterface {
-    interface ViewPresenterInterface {
-
+    interface ViewPresenter {
         void getRoster();
-
     }
 
-    interface PresenterViewInterface {
-
+    interface PresenterView {
         void returnRosters(List<Roster> rosters);
-
     }
 
-
-
-    interface PresenterModelInterface {
-
+    interface PresenterModel {
         void downloadRosters();
-        void downloadRostersFromDB();
-
     }
 
-    interface ModelPresenterInterface {
-
+    interface ModelPresenter {
         void returnRosters(List<Roster> rosters);
+    }
 
+    interface ViewPresenterDB {
+        void getRosterDB();
+    }
+
+    interface PresenterViewDB {
+        void returnRostersDB(List<Roster> rosters);
+    }
+
+    interface PresenterModelDB {
+        void downloadRostersDB();
+    }
+
+    interface ModelPresenterDB {
+        void returnRostersDB(List<Roster> rosters);
     }
 }

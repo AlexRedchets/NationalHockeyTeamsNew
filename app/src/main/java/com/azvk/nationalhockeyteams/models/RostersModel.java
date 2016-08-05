@@ -36,10 +36,10 @@ public class RostersModel implements RostersInterface.PresenterModelInterface {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(rostersData -> {
-                    Log.i(TAG, "COOL");
-                    rosters = rostersData;
-                    view.returnRosters(rosters);
-                },
+                            Log.i(TAG, "COOL");
+                            rosters = rostersData;
+                            view.returnRosters(rosters);
+                        },
                         throwable -> Log.e("Error", throwable.getMessage()));
     }
 

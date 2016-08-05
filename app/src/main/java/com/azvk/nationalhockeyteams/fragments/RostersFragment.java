@@ -25,12 +25,12 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-public class RostersFragment extends Fragment implements RostersInterface.PresenterViewInterface {
+public class RostersFragment extends Fragment implements RostersInterface.PresenterView {
 
     private static final String TAG = RostersFragment.class.getSimpleName();
     private RecyclerView recyclerView;
     private RostersAdapter rostersAdapter;
-    RostersInterface.ViewPresenterInterface viewPresenterInterface;
+    RostersInterface.ViewPresenter viewPresenter;
 
     public static RostersFragment newInstance(){
         return new RostersFragment();
@@ -62,8 +62,8 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
             NetworkState networkState = new NetworkState(getActivity());
             if (networkState.isNetworkAvailable()){
                 Log.i(TAG, "Network Available");
-                viewPresenterInterface = new RostersPresenter(this);
-                viewPresenterInterface.getRoster();
+                viewPresenter = new RostersPresenter(this);
+                viewPresenter.getRoster();
             }
             else if (!rosterList.isEmpty()){
                 Log.i(TAG, "realm != null");

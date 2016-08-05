@@ -27,13 +27,6 @@ public class RostersPresenter implements RostersInterface.ViewPresenterInterface
     }
 
     @Override
-    public void getRosterFromDB() {
-        Log.i(TAG, "getRosterFromDB started");
-        presenterModelInterface.downloadRostersFromDB();
-    }
-
-
-    @Override
     public void returnRosters(List<Roster> rosters) {
         Log.i(TAG, "returnRosters");
         if (view != null) {
