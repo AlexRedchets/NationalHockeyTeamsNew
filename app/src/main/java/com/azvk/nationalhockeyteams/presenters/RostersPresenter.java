@@ -8,22 +8,22 @@ import com.azvk.nationalhockeyteams.models.RostersModel;
 
 import java.util.List;
 
-public class RostersPresenter implements RostersInterface.ViewPresenterInterface, RostersInterface.ModelPresenterInterface {
+public class RostersPresenter implements RostersInterface.ViewPresenter, RostersInterface.ModelPresenter {
 
     private static final String TAG = RostersPresenter.class.getSimpleName();
-    private RostersInterface.PresenterModelInterface presenterModelInterface;
-    RostersInterface.PresenterViewInterface view;
+    private RostersInterface.PresenterModel presenterModel;
+    RostersInterface.PresenterView view;
 
 
-    public RostersPresenter(RostersInterface.PresenterViewInterface view) {
+    public RostersPresenter(RostersInterface.PresenterView view) {
         this.view = view;
-        presenterModelInterface = new RostersModel(this);
+        presenterModel = new RostersModel(this);
     }
 
     @Override
     public void getRoster() {
         Log.i(TAG, "getRoster started");
-        presenterModelInterface.downloadRosters();
+        presenterModel.downloadRosters();
     }
 
     @Override

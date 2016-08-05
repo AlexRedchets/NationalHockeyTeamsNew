@@ -18,6 +18,7 @@ import com.azvk.nationalhockeyteams.RealmState;
 import com.azvk.nationalhockeyteams.adapters.RostersAdapter;
 import com.azvk.nationalhockeyteams.interfaces.RostersInterface;
 import com.azvk.nationalhockeyteams.models.Roster;
+import com.azvk.nationalhockeyteams.presenters.RostersDBPresenter;
 import com.azvk.nationalhockeyteams.presenters.RostersPresenter;
 
 import java.util.List;
@@ -25,12 +26,18 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-public class RostersFragment extends Fragment implements RostersInterface.PresenterView {
+public class RostersFragment extends Fragment implements RostersInterface.PresenterView, RostersInterface.PresenterViewDB {
 
     private static final String TAG = RostersFragment.class.getSimpleName();
     private RecyclerView recyclerView;
     private RostersAdapter rostersAdapter;
+    List<Roster> rosterList;
+
+    private Realm realm;
+
     RostersInterface.ViewPresenter viewPresenter;
+
+    RostersInterface.ViewPresenterDB viewPresenterDB;
 
     public static RostersFragment newInstance(){
         return new RostersFragment();
@@ -48,6 +55,9 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         recyclerView.setLayoutManager(layoutManager);
         rostersAdapter = new RostersAdapter(getContext()) ;
         recyclerView.setAdapter(rostersAdapter);
+
+        viewPresenterDB = new RostersDBPresenter(this);
+        viewPresenterDB.getRosterDB();
 
         return view;
     }
@@ -84,13 +94,20 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     public void returnRosters(List<Roster> rosters) {
         Log.i(TAG, "returnRosters started");
 
-        /*realm.beginTransaction();
+        realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
         if (realm != null){
             realm.deleteAll();
         }
         realm.copyToRealmOrUpdate(rosters);
-        realm.commitTransaction();*/
+        realm.commitTransaction();
 
         rostersAdapter.updateAdapter(rosters);
+    }
+
+    @Override
+    public void returnRostersDB(List<Roster> rosters) {
+        Log.i(TAG, "returnRostersDB started");
+        rosterList = rosters;
     }
 }

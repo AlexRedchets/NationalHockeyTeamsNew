@@ -14,16 +14,16 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class RostersModel implements RostersInterface.PresenterModelInterface {
+public class RostersModel implements RostersInterface.PresenterModel {
 
     private static final String TAG = RostersModel.class.getSimpleName();
     private List<Roster> rosters;
-    private RostersInterface.ModelPresenterInterface view;
+    private RostersInterface.ModelPresenter view;
     private Realm realm;
     private List<Roster> rosterList;
 
 
-    public RostersModel(RostersInterface.ModelPresenterInterface view) {
+    public RostersModel(RostersInterface.ModelPresenter view) {
         this.view = view;
     }
 
@@ -41,12 +41,5 @@ public class RostersModel implements RostersInterface.PresenterModelInterface {
                             view.returnRosters(rosters);
                         },
                         throwable -> Log.e("Error", throwable.getMessage()));
-    }
-
-    @Override
-    public void downloadRostersFromDB() {
-        RealmState realmState = new RealmState(view);
-        realm = realmState.getRealm();
-        rosterList = realm.where(Roster.class).findAll();
     }
 }
