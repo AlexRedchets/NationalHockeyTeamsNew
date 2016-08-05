@@ -3,7 +3,6 @@ package com.azvk.nationalhockeyteams.models;
 import android.util.Log;
 
 import com.azvk.nationalhockeyteams.Generator;
-import com.azvk.nationalhockeyteams.RealmState;
 import com.azvk.nationalhockeyteams.client.RostersClient;
 import com.azvk.nationalhockeyteams.interfaces.RostersInterface;
 

@@ -10,11 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.azvk.nationalhockeyteams.NetworkState;
 import com.azvk.nationalhockeyteams.R;
-import com.azvk.nationalhockeyteams.RealmState;
 import com.azvk.nationalhockeyteams.adapters.RostersAdapter;
 import com.azvk.nationalhockeyteams.interfaces.RostersInterface;
 import com.azvk.nationalhockeyteams.models.Roster;
@@ -23,7 +21,6 @@ import com.azvk.nationalhockeyteams.presenters.RostersPresenter;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 public class RostersFragment extends Fragment implements RostersInterface.PresenterView {
 
@@ -89,7 +86,10 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
             }
         }
         else{
-            rostersAdapter.updateAdapter(rosterList);
+            if (!rosterList.isEmpty()){
+                Log.i(TAG, "realm != null");
+                rostersAdapter.updateAdapter(rosterList);
+            }
         }
     }
 
