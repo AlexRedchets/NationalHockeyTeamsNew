@@ -12,7 +12,7 @@ public class RostersPresenter implements RostersInterface.ViewPresenter, Rosters
 
     private static final String TAG = RostersPresenter.class.getSimpleName();
     private RostersInterface.PresenterModel presenterModel;
-    RostersInterface.PresenterView view;
+    private RostersInterface.PresenterView view;
 
 
     public RostersPresenter(RostersInterface.PresenterView view) {
@@ -27,10 +27,24 @@ public class RostersPresenter implements RostersInterface.ViewPresenter, Rosters
     }
 
     @Override
+    public void getRosterDB() {
+        Log.i(TAG, "getRosterDB started");
+        presenterModel.downloadRostersDB();
+    }
+
+    @Override
     public void returnRosters(List<Roster> rosters) {
         Log.i(TAG, "returnRosters");
         if (view != null) {
             view.returnRosters(rosters);
+        }
+    }
+
+    @Override
+    public void returnRostersDB(List<Roster> rosters) {
+        Log.i(TAG, "returnRostersDB");
+        if (view != null) {
+            view.returnRostersDB(rosters);
         }
     }
 }

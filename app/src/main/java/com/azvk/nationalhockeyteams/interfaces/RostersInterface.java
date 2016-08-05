@@ -7,33 +7,21 @@ import java.util.List;
 public interface RostersInterface {
     interface ViewPresenter {
         void getRoster();
+        void getRosterDB();
     }
 
     interface PresenterView {
         void returnRosters(List<Roster> rosters);
+        void returnRostersDB(List<Roster> rosters);
     }
 
     interface PresenterModel {
         void downloadRosters();
+        void downloadRostersDB();
     }
 
     interface ModelPresenter {
         void returnRosters(List<Roster> rosters);
-    }
-
-    interface ViewPresenterDB {
-        void getRosterDB();
-    }
-
-    interface PresenterViewDB {
-        void returnRostersDB(List<Roster> rosters);
-    }
-
-    interface PresenterModelDB {
-        void downloadRostersDB();
-    }
-
-    interface ModelPresenterDB {
         void returnRostersDB(List<Roster> rosters);
     }
 }

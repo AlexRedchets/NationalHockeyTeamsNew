@@ -42,4 +42,12 @@ public class RostersModel implements RostersInterface.PresenterModel {
                         },
                         throwable -> Log.e("Error", throwable.getMessage()));
     }
+
+    @Override
+    public void downloadRostersDB() {
+        Log.i(TAG, "downloadRostersDB started");
+        realm = Realm.getDefaultInstance();
+        rosterList = realm.where(Roster.class).findAll();
+        view.returnRostersDB(rosterList);
+    }
 }

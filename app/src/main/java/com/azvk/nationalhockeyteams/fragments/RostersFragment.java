@@ -18,7 +18,6 @@ import com.azvk.nationalhockeyteams.RealmState;
 import com.azvk.nationalhockeyteams.adapters.RostersAdapter;
 import com.azvk.nationalhockeyteams.interfaces.RostersInterface;
 import com.azvk.nationalhockeyteams.models.Roster;
-import com.azvk.nationalhockeyteams.presenters.RostersDBPresenter;
 import com.azvk.nationalhockeyteams.presenters.RostersPresenter;
 
 import java.util.List;
@@ -26,7 +25,7 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-public class RostersFragment extends Fragment implements RostersInterface.PresenterView, RostersInterface.PresenterViewDB {
+public class RostersFragment extends Fragment implements RostersInterface.PresenterView {
 
     private static final String TAG = RostersFragment.class.getSimpleName();
     private RecyclerView recyclerView;
@@ -37,7 +36,6 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
 
     RostersInterface.ViewPresenter viewPresenter;
 
-    RostersInterface.ViewPresenterDB viewPresenterDB;
 
     public static RostersFragment newInstance(){
         return new RostersFragment();
@@ -56,8 +54,8 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         rostersAdapter = new RostersAdapter(getContext()) ;
         recyclerView.setAdapter(rostersAdapter);
 
-        viewPresenterDB = new RostersDBPresenter(this);
-        viewPresenterDB.getRosterDB();
+        viewPresenter = new RostersPresenter(this);
+        viewPresenter.getRosterDB();
 
         return view;
     }
@@ -108,6 +106,11 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     @Override
     public void returnRostersDB(List<Roster> rosters) {
         Log.i(TAG, "returnRostersDB started");
-        rosterList = rosters;
+        if (!rosters.isEmpty()) {
+            rosterList = rosters;
+        }
+        else{
+            Log.i(TAG, "Database is empty");
+        }
     }
 }
