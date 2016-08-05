@@ -30,11 +30,13 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     private static final String TAG = RostersFragment.class.getSimpleName();
     private RecyclerView recyclerView;
     private RostersAdapter rostersAdapter;
-    List<Roster> rosterList;
+    private List<Roster> rosterList;
 
     private Realm realm;
 
-    RostersInterface.ViewPresenter viewPresenter;
+    private NetworkState networkState;
+
+    private RostersInterface.ViewPresenter viewPresenter;
 
 
     public static RostersFragment newInstance(){
@@ -47,6 +49,8 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         Log.i(TAG, "onCreateView started");
         View view = inflater.inflate(R.layout.fragment_rosters, container, false);
 
+        networkState = new NetworkState(getActivity());
+
         //Seting up RecycleView and Adapter
         recyclerView = (RecyclerView)view.findViewById(R.id.recycle_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -54,8 +58,10 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         rostersAdapter = new RostersAdapter(getContext()) ;
         recyclerView.setAdapter(rostersAdapter);
 
-        viewPresenter = new RostersPresenter(this);
-        viewPresenter.getRosterDB();
+        if (!networkState.isNetworkAvailable()){
+            viewPresenter = new RostersPresenter(this);
+            viewPresenter.getRosterDB();
+        }
 
         return view;
     }
@@ -67,7 +73,6 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
 
         if (savedInstanceState == null){
             Log.i(TAG, "savedInstanceState == null");
-            NetworkState networkState = new NetworkState(getActivity());
             if (networkState.isNetworkAvailable()){
                 Log.i(TAG, "Network Available");
                 viewPresenter = new RostersPresenter(this);
@@ -107,10 +112,11 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     public void returnRostersDB(List<Roster> rosters) {
         Log.i(TAG, "returnRostersDB started");
         if (!rosters.isEmpty()) {
-            rosterList = rosters;
+            Log.i(TAG, "Database is NOT empty");
         }
         else{
             Log.i(TAG, "Database is empty");
         }
+        rosterList = rosters;
     }
 }
