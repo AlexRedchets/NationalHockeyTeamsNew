@@ -54,23 +54,23 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
 
         Log.i(TAG, "onLoginButtonClicked");
 
-        if(isNetworkAvailable()){
-            //if there is internet connection
-            if (isValid(inputName, inputPassword)){
-                Log.i(TAG, "login and password are valid");
+        if (isValid(inputName, inputPassword)){
+            Log.i(TAG, "login and password are valid");
+
+            if(isNetworkAvailable()){
+                //if there is internet connection
                 viewPresenter = new LoginPresenter(this);
-                viewPresenter.loginUser(inputName.getText().toString(), inputPassword.getText().toString());
-            }
+                viewPresenter.loginUser(inputName.getText().toString(), inputPassword.getText().toString());}
             else{
-                Log.i(TAG, "login and password are NOT valid");
-                Snackbar.make(view, R.string.empty_error,
+                //if there is not internet connection
+                Snackbar.make(view, R.string.network_error,
                         Snackbar.LENGTH_SHORT)
                         .show();
             }
         }
         else{
-            //if there is not internet connection
-            Snackbar.make(view, R.string.network_error,
+            Log.i(TAG, "login and password are NOT valid");
+            Snackbar.make(view, R.string.empty_error,
                     Snackbar.LENGTH_SHORT)
                     .show();
         }
@@ -101,6 +101,7 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
 
             Intent intent = new Intent(getContext(), TeamInfoActivity.class);
             startActivity(intent);
+            getActivity().finish();
         }
         else {
             Toast.makeText(getContext(), "User NOT found", Toast.LENGTH_SHORT).show();

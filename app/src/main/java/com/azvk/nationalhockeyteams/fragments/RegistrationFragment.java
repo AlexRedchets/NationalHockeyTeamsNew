@@ -51,34 +51,37 @@ public class RegistrationFragment extends Fragment implements UserInterface.Regi
 
     @OnClick(R.id.signup_button_reg)
     void signUp(View view){
-        if (isNetworkAvailable()){
-            //if there is internet connection
-            switch (isValid(inputName, inputPassword, inputRePassword)){
-                case 0:
-                    Log.i(TAG, "login and password are NOT valid");
-                    Snackbar.make(view, R.string.empty_error,
-                            Snackbar.LENGTH_SHORT)
-                            .show();
-                    break;
-                case 1:
-                    Log.i(TAG, "passwords do not match");
-                    Snackbar.make(view, R.string.passwords_error,
-                            Snackbar.LENGTH_SHORT)
-                            .show();
-                    break;
-                case 2:
-                    Log.i(TAG, "Input info is valid");
+
+        switch (isValid(inputName, inputPassword, inputRePassword)){
+            case 0:
+                Log.i(TAG, "login and password are NOT valid");
+                Snackbar.make(view, R.string.empty_error,
+                        Snackbar.LENGTH_SHORT)
+                        .show();
+                break;
+            case 1:
+                Log.i(TAG, "passwords do not match");
+                Snackbar.make(view, R.string.passwords_error,
+                        Snackbar.LENGTH_SHORT)
+                        .show();
+                break;
+            case 2:
+                Log.i(TAG, "Input info is valid");
+
+                if (isNetworkAvailable()){
+                    //if there is internet connection
                     viewPresenter = new RegistrationPresenter(this);
                     viewPresenter.registerUser(inputName.getText().toString(), inputPassword.getText().toString());
                     break;
-            }
+                } else{
+                    //if there is not internet connection
+                    Snackbar.make(view, R.string.network_error,
+                            Snackbar.LENGTH_SHORT)
+                            .show();
+                }
+                break;
         }
-        else{
-            //if there is not internet connection
-            Snackbar.make(view, R.string.network_error,
-                    Snackbar.LENGTH_SHORT)
-                    .show();
-        }
+
     }
 
     private int isValid(EditText inputName, EditText inputPassword, EditText inputRePassword) {
@@ -127,6 +130,7 @@ public class RegistrationFragment extends Fragment implements UserInterface.Regi
 
                 Intent intent = new Intent(getContext(), TeamInfoActivity.class);
                 startActivity(intent);
+                getActivity().finish();
                 break;
         }
     }

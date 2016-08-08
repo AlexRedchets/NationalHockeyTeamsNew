@@ -130,8 +130,8 @@ public class TeamInfoActivity extends AppCompatActivity
                 editor.apply();
 
                 Intent intent = new Intent(this, LoginActivity.class);
-                finish();
                 startActivity(intent);
+                finish();
                 break;
         }
 
