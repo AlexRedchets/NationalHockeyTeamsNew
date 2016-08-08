@@ -2,49 +2,53 @@ package com.azvk.nationalhockeyteams.presenters;
 
 import android.util.Log;
 
+import com.azvk.nationalhockeyteams.Generator;
+import com.azvk.nationalhockeyteams.client.RostersClient;
 import com.azvk.nationalhockeyteams.interfaces.RostersInterface;
 import com.azvk.nationalhockeyteams.models.Roster;
-import com.azvk.nationalhockeyteams.models.RostersModel;
 
 import java.util.List;
 
-public class RostersPresenter implements RostersInterface.ViewPresenter, RostersInterface.ModelPresenter {
+import io.realm.Realm;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
+public class RostersPresenter implements RostersInterface.ViewPresenter {
 
     private static final String TAG = RostersPresenter.class.getSimpleName();
-    private RostersInterface.PresenterModel presenterModel;
     private RostersInterface.PresenterView view;
+    private List<Roster> rosterList;
+    private Realm realm;
 
 
     public RostersPresenter(RostersInterface.PresenterView view) {
         this.view = view;
-        presenterModel = new RostersModel(this);
     }
 
     @Override
     public void getRoster() {
         Log.i(TAG, "getRoster started");
-        presenterModel.downloadRosters();
+
+        RostersClient rostersClient = Generator.createService(RostersClient.class);
+        Observable<List<Roster>> rostersObservable = rostersClient.rosters("Russia");
+        rostersObservable
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(rostersData -> {
+                            Log.i(TAG, "COOL");
+                            rosterList = rostersData;
+                            view.returnRosters(rosterList);
+                        },
+                        throwable -> Log.e("Error", throwable.getMessage()));
     }
 
     @Override
     public void getRosterDB() {
         Log.i(TAG, "getRosterDB started");
-        presenterModel.downloadRostersDB();
-    }
 
-    @Override
-    public void returnRosters(List<Roster> rosters) {
-        Log.i(TAG, "returnRosters");
-        if (view != null) {
-            view.returnRosters(rosters);
-        }
-    }
-
-    @Override
-    public void returnRostersDB(List<Roster> rosters) {
-        Log.i(TAG, "returnRostersDB");
-        if (view != null) {
-            view.returnRostersDB(rosters);
-        }
+        realm = Realm.getDefaultInstance();
+        rosterList = realm.where(Roster.class).findAll();
+        view.returnRostersDB(rosterList);
     }
 }

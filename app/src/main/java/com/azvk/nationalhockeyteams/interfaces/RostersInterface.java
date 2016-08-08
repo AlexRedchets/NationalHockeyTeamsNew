@@ -14,14 +14,4 @@ public interface RostersInterface {
         void returnRosters(List<Roster> rosters);
         void returnRostersDB(List<Roster> rosters);
     }
-
-    interface PresenterModel {
-        void downloadRosters();
-        void downloadRostersDB();
-    }
-
-    interface ModelPresenter {
-        void returnRosters(List<Roster> rosters);
-        void returnRostersDB(List<Roster> rosters);
-    }
 }

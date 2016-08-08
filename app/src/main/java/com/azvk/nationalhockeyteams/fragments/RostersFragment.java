@@ -46,6 +46,7 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         Log.i(TAG, "onCreateView started");
         View view = inflater.inflate(R.layout.fragment_rosters, container, false);
 
+        //check the connection to the Internet
         networkState = new NetworkState(getActivity());
 
         //Seting up RecycleView and Adapter
@@ -55,10 +56,10 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         rostersAdapter = new RostersAdapter(getContext()) ;
         recyclerView.setAdapter(rostersAdapter);
 
-        if (!networkState.isNetworkAvailable()){
-            viewPresenter = new RostersPresenter(this);
-            viewPresenter.getRosterDB();
-        }
+        //get info from database
+        viewPresenter = new RostersPresenter(this);
+        viewPresenter.getRosterDB();
+
 
         return view;
     }
@@ -68,26 +69,34 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         Log.i(TAG, "onViewCreated started");
         super.onViewCreated(view, savedInstanceState);
 
-        if (savedInstanceState == null){
+        //if app launching at first time
+        if (savedInstanceState == null) {
             Log.i(TAG, "savedInstanceState == null");
             if (networkState.isNetworkAvailable()){
                 Log.i(TAG, "Network Available");
                 viewPresenter = new RostersPresenter(this);
                 viewPresenter.getRoster();
             }
-            else if (!rosterList.isEmpty()){
-                Log.i(TAG, "realm != null");
-                rostersAdapter.updateAdapter(rosterList);
-            }
-            else{
+            else if (rosterList.isEmpty()) {
+                Log.i(TAG, "No connection to the Intenet and no info in DB");
                 Snackbar.make(view, R.string.network_error,
                         Snackbar.LENGTH_LONG)
                         .show();
             }
-        }
-        else{
-            if (!rosterList.isEmpty()){
-                Log.i(TAG, "realm != null");
+            else{
+                Log.i(TAG, "No connection to the Intenet, get info from DB");
+                rostersAdapter.updateAdapter(rosterList);
+            }
+        } else {
+            Log.i(TAG, "savedInstanceState NOT null");
+            if (rosterList.isEmpty()){
+                Log.i(TAG, "No connection to the Intenet and no info in DB");
+                Snackbar.make(view, R.string.network_error,
+                        Snackbar.LENGTH_LONG)
+                        .show();
+            }
+            else{
+                Log.i(TAG, "No connection to the Intenet, get info from DB");
                 rostersAdapter.updateAdapter(rosterList);
             }
         }
@@ -104,19 +113,21 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         }
         realm.copyToRealmOrUpdate(rosters);
         realm.commitTransaction();
-
         rostersAdapter.updateAdapter(rosters);
+
+        rosterList = rosters;
     }
 
     @Override
     public void returnRostersDB(List<Roster> rosters) {
         Log.i(TAG, "returnRostersDB started");
-        if (!rosters.isEmpty()) {
+
+        if (rosters.isEmpty()) {
+            Log.i(TAG, "Database is empty");
+        } else {
             Log.i(TAG, "Database is NOT empty");
         }
-        else{
-            Log.i(TAG, "Database is empty");
-        }
+
         rosterList = rosters;
     }
 }
