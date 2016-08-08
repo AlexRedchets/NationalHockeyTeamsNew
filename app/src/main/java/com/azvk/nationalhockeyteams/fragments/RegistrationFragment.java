@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.azvk.nationalhockeyteams.activities.TeamInfoActivity;
 import com.azvk.nationalhockeyteams.interfaces.UserInterface;
-import com.azvk.nationalhockeyteams.presenters.LoginPresenter;
 import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.presenters.RegistrationPresenter;
 
