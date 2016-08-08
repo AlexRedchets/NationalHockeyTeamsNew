@@ -2,6 +2,7 @@ package com.azvk.nationalhockeyteams.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -115,6 +116,15 @@ public class RegistrationFragment extends Fragment implements UserInterface.Regi
             case 2:
                 Log.i(TAG, "User added");
                 Toast.makeText(getContext(), "userAdded", Toast.LENGTH_SHORT).show();
+
+                //save username and password into shared preferences
+                SharedPreferences sharedPref = getContext().getSharedPreferences(
+                        "userInfo", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("username", inputName.getText().toString());
+                editor.putString("password", inputPassword.getText().toString());
+                editor.apply();
+
                 Intent intent = new Intent(getContext(), TeamInfoActivity.class);
                 startActivity(intent);
                 break;

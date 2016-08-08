@@ -16,8 +16,7 @@
             android:name=".activities.LoginActivity"
             android:launchMode="singleTop"
             android:theme="@style/MyMaterialThemeNoActionBar"
-            android:windowSoftInputMode="stateHidden|adjustUnspecified">
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustUnspecified"/>
         <activity
             android:name=".activities.RegistrationActivity"
             android:label="@string/registration_activity_title"
@@ -31,6 +30,10 @@
             android:name=".activities.TeamInfoActivity"
             android:label="@string/title_activity_team_info"
             android:theme="@style/MyMaterialTheme.NoActionBar">
+        </activity>
+        <activity android:name=".activities.SplashActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/MyMaterialThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
