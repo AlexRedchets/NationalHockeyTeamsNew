@@ -17,7 +17,9 @@ import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.azvk.nationalhockeyteams.NetworkState;
 import com.azvk.nationalhockeyteams.R;
@@ -40,7 +42,15 @@ public class TeamInfoActivity extends AppCompatActivity
     NavigationView navigationView;
     @BindView(R.id.view_pager)
     ViewPager viewPager;
+    @BindView(R.id.view_flipper)
+    ViewFlipper viewFlipper;
     FragmentPagerAdapter fragmentPagerAdapter;
+
+    int[] resources = {
+            R.drawable.be57e01fce6719,
+            R.drawable.malkin,
+            R.drawable.tarasenko,
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +70,23 @@ public class TeamInfoActivity extends AppCompatActivity
         //Activate viewPager
         fragmentPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(fragmentPagerAdapter);
-/*
-        if (savedInstanceState == null){
-            NetworkState networkState = new NetworkState(this);
-            if (!networkState.isNetworkAvailable()){
-                Snackbar.make(drawer, R.string.network_error,
-                        Snackbar.LENGTH_LONG)
-                        .show();
-            }
-        }*/
+
+        // Add all images to the ViewFlipper
+        for (int i = 0; i < resources.length; i++) {
+            ImageView imageView = new ImageView(this);
+            imageView.setImageResource(resources[i]);
+            viewFlipper.addView(imageView);
+        }
+
+
+
+        // Set in/out flipping animations
+        viewFlipper.setInAnimation(this, android.R.anim.fade_in);
+        viewFlipper.setOutAnimation(this, android.R.anim.fade_out);
+
+        viewFlipper.setAutoStart(true);
+        viewFlipper.setFlipInterval(5000); // flip every 3 seconds (3000ms)
+
     }
 
     @Override
@@ -86,21 +104,6 @@ public class TeamInfoActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.team_info, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
