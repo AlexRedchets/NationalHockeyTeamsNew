@@ -16,7 +16,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.azvk.nationalhockeyteams.activities.TeamInfoActivity;
-import com.azvk.nationalhockeyteams.presenters.UserPresenter;
+import com.azvk.nationalhockeyteams.interfaces.UserInterface;
+import com.azvk.nationalhockeyteams.presenters.LoginPresenter;
 import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.activities.RegistrationActivity;
 
@@ -24,11 +25,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements UserInterface.LoginPresenterView {
 
     private  static final String TAG = LoginFragment.class.getSimpleName();
 
-    UserPresenter presenter;
+    UserInterface.LoginViewPresenter viewPresenter;
     @BindView(R.id.input_name_login)
     EditText inputName;
     @BindView(R.id.input_password_login)
@@ -56,8 +57,8 @@ public class LoginFragment extends Fragment {
             //if there is internet connection
             if (isValid(inputName, inputPassword)){
                 Log.i(TAG, "login and password are valid");
-                presenter = new UserPresenter(this, inputName.getText().toString(), inputPassword.getText().toString());
-                presenter.loginUser();
+                viewPresenter = new LoginPresenter(this);
+                viewPresenter.loginUser(inputName.getText().toString(), inputPassword.getText().toString());
             }
             else{
                 Log.i(TAG, "login and password are NOT valid");

@@ -36,11 +36,11 @@ public class RostersPresenter implements RostersInterface.ViewPresenter {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(rostersData -> {
-                            Log.i(TAG, "COOL");
+                            Log.i(TAG, "Downloading data from server: SUCCESS");
                             rosterList = rostersData;
                             view.returnRosters(rosterList);
                         },
-                        throwable -> Log.e("Error", throwable.getMessage()));
+                        throwable -> Log.e(TAG + "ERROR: ", throwable.getMessage()));
     }
 
     @Override

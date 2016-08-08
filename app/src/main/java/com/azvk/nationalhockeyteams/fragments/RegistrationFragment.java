@@ -16,14 +16,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.azvk.nationalhockeyteams.activities.TeamInfoActivity;
-import com.azvk.nationalhockeyteams.presenters.UserPresenter;
+import com.azvk.nationalhockeyteams.interfaces.UserInterface;
+import com.azvk.nationalhockeyteams.presenters.LoginPresenter;
 import com.azvk.nationalhockeyteams.R;
+import com.azvk.nationalhockeyteams.presenters.RegistrationPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegistrationFragment extends Fragment{
+public class RegistrationFragment extends Fragment implements UserInterface.RegistrationPresenterView{
+
+    private static final String TAG = RegistrationFragment.class.getSimpleName();
 
     @BindView(R.id.input_name_reg)
     EditText inputName;
@@ -32,8 +36,7 @@ public class RegistrationFragment extends Fragment{
     @BindView(R.id.input_repassword_reg)
     EditText inputRePassword;
 
-    UserPresenter presenter;
-    private static final String TAG = RegistrationFragment.class.getSimpleName();
+    UserInterface.RegistrationViewPresenter viewPresenter;
 
     public RegistrationFragment() {
     }
@@ -65,11 +68,12 @@ public class RegistrationFragment extends Fragment{
                     break;
                 case 2:
                     Log.i(TAG, "Input info is valid");
-                    presenter = new UserPresenter(this, inputName.getText().toString(), inputPassword.getText().toString());
-                    presenter.registrationUser();
+                    viewPresenter = new RegistrationPresenter(this);
+                    viewPresenter.registerUser(inputName.getText().toString(), inputPassword.getText().toString());
                     break;
             }
-        }else{
+        }
+        else{
             //if there is not internet connection
             Snackbar.make(view, R.string.network_error,
                     Snackbar.LENGTH_SHORT)
@@ -91,24 +95,30 @@ public class RegistrationFragment extends Fragment{
             return 2;
     }
 
-    public void userExists(){
-        Toast.makeText(getContext(), "userExists", Toast.LENGTH_SHORT).show();
-    }
-
-    public void errorOnSave(){
-        Toast.makeText(getContext(), "errorOnSave()", Toast.LENGTH_SHORT).show();
-    }
-
-    public void userAdded(){
-        Toast.makeText(getContext(), "userAdded", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getContext(), TeamInfoActivity.class);
-        startActivity(intent);
-    }
-
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    @Override
+    public void registerAuthComplete(int result) {
+        switch (result) {
+            case 0:
+                Log.i(TAG, "User exists");
+                Toast.makeText(getContext(), "userExists", Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+                Log.i(TAG, "Error on save");
+                Toast.makeText(getContext(), "errorOnSave()", Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+                Log.i(TAG, "User added");
+                Toast.makeText(getContext(), "userAdded", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), TeamInfoActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }
