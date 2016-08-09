@@ -44,12 +44,6 @@ public class TeamInfoActivity extends AppCompatActivity
     @BindView(R.id.nav_view)
     NavigationView navigationView;
 
-    int[] resources = {
-            R.drawable.be57e01fce6719,
-            R.drawable.malkin,
-            R.drawable.tarasenko,
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,24 +64,6 @@ public class TeamInfoActivity extends AppCompatActivity
                     .add(R.id.fragment_frame_main, new TeamDescriptionFragment())
                     .commit();
         }
-
-
-        // Add all images to the ViewFlipper
-//        for (int i = 0; i < resources.length; i++) {
-  //          ImageView imageView = new ImageView(this);
-    //        imageView.setImageResource(resources[i]);
-      //      viewFlipper.addView(imageView);
-        //}
-
-
-/*
-        // Set in/out flipping animations
-        viewFlipper.setInAnimation(this, android.R.anim.fade_in);
-        viewFlipper.setOutAnimation(this, android.R.anim.fade_out);
-
-        viewFlipper.setAutoStart(true);
-        viewFlipper.setFlipInterval(5000); // flip every 3 seconds (3000ms)*/
-
     }
 
     @Override
