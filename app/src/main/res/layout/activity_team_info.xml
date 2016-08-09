@@ -9,28 +9,10 @@
     tools:openDrawer="start">
 
     <LinearLayout
+        android:id="@+id/fragment_frame_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <ViewFlipper
-            android:id="@+id/view_flipper"
-            android:layout_marginTop="64dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"/>
-        <android.support.v4.view.ViewPager
-            android:id="@+id/view_pager"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <android.support.v4.view.PagerTabStrip
-                android:id="@+id/pager_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:paddingBottom="4dp"
-                android:paddingTop="4dp"/>
-        </android.support.v4.view.ViewPager>
     </LinearLayout>
 
     <include

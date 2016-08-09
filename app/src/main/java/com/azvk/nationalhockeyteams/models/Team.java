@@ -1,5 +1,8 @@
 package com.azvk.nationalhockeyteams.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -10,7 +13,7 @@ public class Team extends RealmObject{
     private String flag;
     private String head_coach;
     private String captain;
-    private String[] header_pic;
+    //private List<String > header_pic;
 
     public String getCaptain() {
         return captain;
@@ -36,13 +39,13 @@ public class Team extends RealmObject{
         this.head_coach = head_coach;
     }
 
-    public String[] getHeader_pic() {
+    /*public List<String> getHeader_pic() {
         return header_pic;
     }
 
-    public void setHeader_pic(String[] header_pic) {
+    public void setHeader_pic(List<String> header_pic) {
         this.header_pic = header_pic;
-    }
+    }*/
 
     public String getName() {
         return name;

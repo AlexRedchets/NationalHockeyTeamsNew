@@ -24,6 +24,9 @@ import android.widget.ViewFlipper;
 import com.azvk.nationalhockeyteams.NetworkState;
 import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.adapters.ViewPagerAdapter;
+import com.azvk.nationalhockeyteams.fragments.LoginFragment;
+import com.azvk.nationalhockeyteams.fragments.TeamDescriptionFragment;
+import com.azvk.nationalhockeyteams.fragments.TeamListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,11 +43,6 @@ public class TeamInfoActivity extends AppCompatActivity
     DrawerLayout drawer;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
-    @BindView(R.id.view_pager)
-    ViewPager viewPager;
-    @BindView(R.id.view_flipper)
-    ViewFlipper viewFlipper;
-    FragmentPagerAdapter fragmentPagerAdapter;
 
     int[] resources = {
             R.drawable.be57e01fce6719,
@@ -67,25 +65,28 @@ public class TeamInfoActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Activate viewPager
-        fragmentPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(fragmentPagerAdapter);
-
-        // Add all images to the ViewFlipper
-        for (int i = 0; i < resources.length; i++) {
-            ImageView imageView = new ImageView(this);
-            imageView.setImageResource(resources[i]);
-            viewFlipper.addView(imageView);
+        if (savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_frame_main, new TeamDescriptionFragment())
+                    .commit();
         }
 
 
+        // Add all images to the ViewFlipper
+//        for (int i = 0; i < resources.length; i++) {
+  //          ImageView imageView = new ImageView(this);
+    //        imageView.setImageResource(resources[i]);
+      //      viewFlipper.addView(imageView);
+        //}
 
+
+/*
         // Set in/out flipping animations
         viewFlipper.setInAnimation(this, android.R.anim.fade_in);
         viewFlipper.setOutAnimation(this, android.R.anim.fade_out);
 
         viewFlipper.setAutoStart(true);
-        viewFlipper.setFlipInterval(5000); // flip every 3 seconds (3000ms)
+        viewFlipper.setFlipInterval(5000); // flip every 3 seconds (3000ms)*/
 
     }
 
@@ -136,6 +137,10 @@ public class TeamInfoActivity extends AppCompatActivity
                 startActivity(intent);
                 finish();
                 break;
+            case R.id.nav_teams:
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_frame_main, new TeamListFragment())
+                        .commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
