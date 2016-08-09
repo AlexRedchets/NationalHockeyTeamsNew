@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.azvk.nationalhockeyteams.R;
-import com.azvk.nationalhockeyteams.models.Roster;
+import com.azvk.nationalhockeyteams.models.Team;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -18,18 +18,18 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RostersAdapter extends RecyclerView.Adapter<RostersAdapter.ViewHolder>{
+public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.ViewHolder> {
 
-    private List<Roster> listRosters;
+    private List<Team> listTeam;
     private Context context;
-    private String TAG = RostersAdapter.class.getSimpleName();
+    private String TAG = TeamsAdapter.class.getSimpleName();
 
-    public RostersAdapter(Context context) {
+    public TeamsAdapter(Context context) {
         this.context = context;
     }
 
-    public void updateAdapter(List<Roster> lists){
-        listRosters = lists;
+    public void updateAdapter(List<Team> lists){
+        listTeam = lists;
         notifyDataSetChanged();
         Log.i(TAG, "Adapter is updated");
     }
@@ -39,13 +39,13 @@ public class RostersAdapter extends RecyclerView.Adapter<RostersAdapter.ViewHold
     }
 
     public void clearAll(){
-        listRosters.clear();
+        listTeam.clear();
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return listRosters != null ? listRosters.size() : 0;
+        return listTeam != null ? listTeam.size() : 0;
     }
 
     @Override
@@ -55,30 +55,29 @@ public class RostersAdapter extends RecyclerView.Adapter<RostersAdapter.ViewHold
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View view = inflater.inflate(R.layout.roster_list_custom_row, parent, false);
+        View view = inflater.inflate(R.layout.team_list_custom_row, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        Roster currentRosterData = listRosters.get(position);
+        Team currentTeamData = listTeam.get(position);
 
-        holder.playerName.setText(currentRosterData.getName());
-        Picasso.with(context).load(currentRosterData.getImageUrl()).into(holder.playerImage);
+        holder.teamName.setText(currentTeamData.getName());
+        Picasso.with(context).load(currentTeamData.getFlag()).into(holder.teamImage);
     }
 
 
     protected static class ViewHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.player_name)
-        TextView playerName;
-        @BindView(R.id.player_image)
-        ImageView playerImage;
+        @BindView(R.id.team_name)
+        TextView teamName;
+        @BindView(R.id.team_image)
+        ImageView teamImage;
 
         private ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
     }
-
 }

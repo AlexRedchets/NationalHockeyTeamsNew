@@ -50,7 +50,7 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         networkState = new NetworkState(getActivity());
 
         //Seting up RecycleView and Adapter
-        recyclerView = (RecyclerView)view.findViewById(R.id.recycle_view);
+        recyclerView = (RecyclerView)view.findViewById(R.id.rosterts_recycle_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         rostersAdapter = new RostersAdapter(getContext()) ;
