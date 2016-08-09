@@ -30,7 +30,7 @@ public class TeamPresenter implements TeamInterface.ViewPresenter {
         Log.i(TAG, "getRoster started");
 
         TeamClient teamClient = Generator.createService(TeamClient.class);
-        Observable<List<Team>> teamObservable = teamClient.teams("Russia");
+        Observable<List<Team>> teamObservable = teamClient.teams();
         teamObservable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
