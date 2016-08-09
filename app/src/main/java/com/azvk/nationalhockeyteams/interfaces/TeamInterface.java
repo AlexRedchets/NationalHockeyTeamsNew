@@ -1,5 +1,9 @@
 package com.azvk.nationalhockeyteams.interfaces;
 
+import com.azvk.nationalhockeyteams.models.Team;
+
+import java.util.List;
+
 public interface TeamInterface {
 
     interface ViewPresenter{
@@ -7,6 +11,6 @@ public interface TeamInterface {
     }
 
     interface PresenterView{
-        void returnTeam();
+        void returnTeam(List<Team> teamsList);
     }
 }

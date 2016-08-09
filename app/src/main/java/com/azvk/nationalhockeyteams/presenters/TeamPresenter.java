@@ -19,6 +19,7 @@ public class TeamPresenter implements TeamInterface.ViewPresenter {
 
     private TeamInterface.PresenterView view;
     private static final String TAG = TeamPresenter.class.getSimpleName();
+    private List<Team> teamsList;
 
     public TeamPresenter(TeamInterface.PresenterView view) {
         this.view = view;
@@ -29,14 +30,14 @@ public class TeamPresenter implements TeamInterface.ViewPresenter {
         Log.i(TAG, "getRoster started");
 
         TeamClient teamClient = Generator.createService(TeamClient.class);
-        Observable<List<Team>> teamObservable = rostersClient.rosters("Russia");
-        rostersObservable
+        Observable<List<Team>> teamObservable = teamClient.teams("Russia");
+        teamObservable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(rostersData -> {
+                .subscribe(teamsData -> {
                             Log.i(TAG, "Downloading data from server: SUCCESS");
-                            rosterList = rostersData;
-                            view.returnRosters(rosterList);
+                            teamsList = teamsData;
+                            view.returnTeam(teamsList);
                         },
                         throwable -> Log.e(TAG + "ERROR: ", throwable.getMessage()));
     }
