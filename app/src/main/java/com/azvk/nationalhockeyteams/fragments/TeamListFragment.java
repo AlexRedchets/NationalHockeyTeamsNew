@@ -8,12 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.azvk.nationalhockeyteams.R;
+import com.azvk.nationalhockeyteams.interfaces.TeamInterface;
 
-public class TeamListFragment extends Fragment {
+public class TeamListFragment extends Fragment implements TeamInterface.PresenterView{
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_team_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_team_list, container, false);
+        return view;
+    }
+
+    @Override
+    public void returnTeam() {
+
     }
 }
