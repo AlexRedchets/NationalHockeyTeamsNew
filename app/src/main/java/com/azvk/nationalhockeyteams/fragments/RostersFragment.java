@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.azvk.nationalhockeyteams.NetworkState;
 import com.azvk.nationalhockeyteams.R;
@@ -106,13 +107,6 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     public void returnRosters(List<Roster> rosters) {
         Log.i(TAG, "returnRosters started");
 
-        realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-        if (realm != null){
-            realm.deleteAll();
-        }
-        realm.copyToRealmOrUpdate(rosters);
-        realm.commitTransaction();
         rostersAdapter.updateAdapter(rosters);
 
         rosterList = rosters;
@@ -129,5 +123,10 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         }
 
         rosterList = rosters;
+    }
+
+    @Override
+    public void returnError(String errorMessage) {
+        Toast.makeText(getContext(), "Enable to connect server. Try later", Toast.LENGTH_LONG).show();
     }
 }

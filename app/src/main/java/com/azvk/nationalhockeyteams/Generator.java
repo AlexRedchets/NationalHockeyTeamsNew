@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Generator {
 
-    private static final String API_URL = "http://54.186.57.223:8080/";
+    private static final String API_URL = "http://54.186.57.223:3000/";
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
     public static Retrofit.Builder builder;

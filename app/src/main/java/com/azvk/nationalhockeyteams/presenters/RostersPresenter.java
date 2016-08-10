@@ -38,9 +38,21 @@ public class RostersPresenter implements RostersInterface.ViewPresenter {
                 .subscribe(rostersData -> {
                             Log.i(TAG, "Downloading data from server: SUCCESS");
                             rosterList = rostersData;
+                            //save data to DB
+                            realm = Realm.getDefaultInstance();
+                            realm.beginTransaction();
+                            if (realm != null){
+                                realm.deleteAll();
+                            }
+                            realm.copyToRealmOrUpdate(rosterList);
+                            realm.commitTransaction();
+
                             view.returnRosters(rosterList);
                         },
-                        throwable -> Log.e(TAG + "ERROR: ", throwable.getMessage()));
+                        throwable -> {
+                            Log.e(TAG + "ERROR: ", throwable.getMessage());
+                            view.returnError(throwable.getMessage());
+                        });
     }
 
     @Override

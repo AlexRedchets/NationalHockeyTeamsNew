@@ -9,6 +9,6 @@ import retrofit2.http.Path;
 import rx.Observable;
 
 public interface TeamClient {
-    @GET("api/new_team")
+    @GET("api/team")
     Observable<List<Team>> teams();
 }
