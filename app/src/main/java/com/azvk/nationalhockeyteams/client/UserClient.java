@@ -8,9 +8,9 @@ import rx.Observable;
 
 public interface UserClient {
 
-    @POST("api/logincheck")
+    @POST("api/login")
     Observable<Boolean> userLogin(@Body User user);
 
-    @POST("api/registrationnew")
+    @POST("api/registration")
     Observable<String> userRegistration(@Body User user);
 }
