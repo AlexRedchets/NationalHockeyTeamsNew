@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.adapters.RostersAdapter;
@@ -50,5 +51,10 @@ public class TeamListFragment extends Fragment implements TeamInterface.Presente
     public void returnTeam(List<Team> teamsList) {
         this.teamList = teamsList;
         teamsAdapter.updateAdapter(teamList);
+    }
+
+    @Override
+    public void errorServer(String error) {
+        Toast.makeText(getContext(), "Enable to connect server. Try later", Toast.LENGTH_LONG).show();
     }
 }

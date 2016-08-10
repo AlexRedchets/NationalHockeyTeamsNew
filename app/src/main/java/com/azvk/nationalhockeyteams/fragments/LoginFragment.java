@@ -108,6 +108,11 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
         }
     }
 
+    @Override
+    public void errorServer(String error) {
+        Toast.makeText(getContext(), "Enable to connect server. Try later", Toast.LENGTH_LONG).show();
+    }
+
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);

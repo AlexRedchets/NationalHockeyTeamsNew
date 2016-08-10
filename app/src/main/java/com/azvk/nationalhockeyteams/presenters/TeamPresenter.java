@@ -39,6 +39,9 @@ public class TeamPresenter implements TeamInterface.ViewPresenter {
                             teamsList = teamsData;
                             view.returnTeam(teamsList);
                         },
-                        throwable -> Log.e(TAG + "ERROR: ", throwable.getMessage()));
+                        throwable -> {
+                            Log.e(TAG + "ERROR: ", throwable.getMessage());
+                            view.errorServer(throwable.getMessage());
+                        });
     }
 }

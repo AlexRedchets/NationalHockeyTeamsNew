@@ -42,6 +42,7 @@ public class LoginPresenter implements UserInterface.LoginViewPresenter{
                 },
                     throwable -> {
                         Log.e("Error", throwable.getMessage());
+                        view.errorServer(throwable.getMessage());
                     });
     }
 }

@@ -8,6 +8,7 @@ public interface UserInterface {
 
     interface LoginPresenterView{
         void userAuthSuccess(boolean user);
+        void errorServer(String error);
     }
 
     interface RegistrationViewPresenter{
@@ -16,5 +17,6 @@ public interface UserInterface {
 
     interface RegistrationPresenterView{
         void registerAuthComplete(int result);
+        void errorServer(String error);
     }
 }

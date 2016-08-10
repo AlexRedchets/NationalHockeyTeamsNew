@@ -51,7 +51,7 @@ public class RostersPresenter implements RostersInterface.ViewPresenter {
                         },
                         throwable -> {
                             Log.e(TAG + "ERROR: ", throwable.getMessage());
-                            view.returnError(throwable.getMessage());
+                            view.errorServer(throwable.getMessage());
                         });
     }
 

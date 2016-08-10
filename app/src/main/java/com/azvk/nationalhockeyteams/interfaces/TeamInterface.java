@@ -12,5 +12,6 @@ public interface TeamInterface {
 
     interface PresenterView{
         void returnTeam(List<Team> teamsList);
+        void errorServer(String error);
     }
 }

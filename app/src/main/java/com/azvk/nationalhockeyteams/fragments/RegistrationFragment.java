@@ -134,4 +134,9 @@ public class RegistrationFragment extends Fragment implements UserInterface.Regi
                 break;
         }
     }
+
+    @Override
+    public void errorServer(String error) {
+        Toast.makeText(getContext(), "Enable to connect server. Try later", Toast.LENGTH_LONG).show();
+    }
 }

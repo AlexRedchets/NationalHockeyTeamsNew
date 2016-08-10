@@ -13,6 +13,6 @@ public interface RostersInterface {
     interface PresenterView {
         void returnRosters(List<Roster> rosters);
         void returnRostersDB(List<Roster> rosters);
-        void returnError(String errorMessage);
+        void errorServer(String errorMessage);
     }
 }

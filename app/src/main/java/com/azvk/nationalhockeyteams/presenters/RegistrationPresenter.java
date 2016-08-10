@@ -49,6 +49,7 @@ public class RegistrationPresenter implements UserInterface.RegistrationViewPres
                         },
                         throwable -> {
                             Log.e("Error", throwable.getMessage());
+                            view.errorServer(throwable.getMessage());
                         });
     }
 }

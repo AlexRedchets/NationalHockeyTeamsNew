@@ -126,7 +126,7 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     }
 
     @Override
-    public void returnError(String errorMessage) {
+    public void errorServer(String errorMessage) {
         Toast.makeText(getContext(), "Enable to connect server. Try later", Toast.LENGTH_LONG).show();
     }
 }
