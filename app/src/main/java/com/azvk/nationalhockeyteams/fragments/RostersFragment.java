@@ -26,14 +26,10 @@ import io.realm.Realm;
 public class RostersFragment extends Fragment implements RostersInterface.PresenterView {
 
     private static final String TAG = RostersFragment.class.getSimpleName();
-    private RecyclerView recyclerView;
+    private RostersInterface.ViewPresenter viewPresenter;
     private RostersAdapter rostersAdapter;
     private List<Roster> rosterList;
-
     private Navigator navigator;
-
-    private RostersInterface.ViewPresenter viewPresenter;
-
 
     public static RostersFragment newInstance(){
         return new RostersFragment();
@@ -49,14 +45,14 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         navigator = new Navigator(getActivity());
 
         //Seting up RecycleView and Adapter
-        recyclerView = (RecyclerView)view.findViewById(R.id.rosterts_recycle_view);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rosterts_recycle_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         rostersAdapter = new RostersAdapter(getContext()) ;
         recyclerView.setAdapter(rostersAdapter);
 
         //get info from database
-        viewPresenter = new RostersPresenter(this);
+        viewPresenter = new RostersPresenter(this, getContext());
         viewPresenter.getRosterDB();
 
 
@@ -73,7 +69,7 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
             Log.i(TAG, "savedInstanceState == null");
             if (navigator.isNetworkAvailable()){
                 Log.i(TAG, "Network Available");
-                viewPresenter = new RostersPresenter(this);
+                viewPresenter = new RostersPresenter(this, getContext());
                 viewPresenter.getRoster();
             }
             else if (rosterList.isEmpty()) {
@@ -125,6 +121,7 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
 
     @Override
     public void errorServer(String errorMessage) {
+        Log.i(TAG, "Getting rosters: server ERROR");
         Toast.makeText(getContext(), "Enable to connect server. Try later", Toast.LENGTH_LONG).show();
     }
 }

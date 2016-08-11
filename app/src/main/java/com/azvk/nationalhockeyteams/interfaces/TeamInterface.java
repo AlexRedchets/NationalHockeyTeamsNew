@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface TeamInterface {
 
-    interface ViewPresenter{
+    interface TeamListViewPresenter{
         void getTeam();
         void saveTeamDB(Team team);
     }
 
-    interface PresenterView{
+    interface TeamListPresenterView{
         void returnTeam(List<Team> teamsList);
         void errorServer(String error);
     }

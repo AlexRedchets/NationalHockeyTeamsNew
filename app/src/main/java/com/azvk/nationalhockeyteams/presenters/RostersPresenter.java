@@ -1,5 +1,6 @@
 package com.azvk.nationalhockeyteams.presenters;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.azvk.nationalhockeyteams.Generator;
@@ -10,6 +11,7 @@ import com.azvk.nationalhockeyteams.models.Roster;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -21,9 +23,15 @@ public class RostersPresenter implements RostersInterface.ViewPresenter {
     private List<Roster> rosterList;
     private Realm realm;
 
-
-    public RostersPresenter(RostersInterface.PresenterView view) {
+    public RostersPresenter(RostersInterface.PresenterView view, Context context) {
         this.view = view;
+
+        RealmConfiguration realmConfig = new RealmConfiguration
+                .Builder(context)
+                .name("rosters")
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(realmConfig);
     }
 
     @Override
@@ -39,14 +47,16 @@ public class RostersPresenter implements RostersInterface.ViewPresenter {
                             Log.i(TAG, "Downloading data from server: SUCCESS");
                             rosterList = rostersData;
 
-                            //save data to DB
-                            realm = Realm.getDefaultInstance();
-                            realm.beginTransaction();
-                            if (realm != null){
-                                realm.deleteAll();
+                            if (rosterList != null){
+                                //save data to DB
+                                realm = Realm.getDefaultInstance();
+                                realm.beginTransaction();
+                                if (realm != null){
+                                    realm.deleteAll();
+                                }
+                                realm.copyToRealmOrUpdate(rosterList);
+                                realm.commitTransaction();
                             }
-                            realm.copyToRealmOrUpdate(rosterList);
-                            realm.commitTransaction();
 
                             view.returnRosters(rosterList);
                         },

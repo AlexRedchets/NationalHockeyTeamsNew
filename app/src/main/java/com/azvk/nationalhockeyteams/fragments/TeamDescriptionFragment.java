@@ -29,7 +29,6 @@ public class TeamDescriptionFragment extends Fragment implements TeamInterface.S
     ViewFlipper viewFlipper;
     FragmentPagerAdapter fragmentPagerAdapter;
     private Team team;
-    private TeamInterface.GetDB getDB;
     String[] resources;
 
     public TeamDescriptionFragment() {}
@@ -50,8 +49,8 @@ public class TeamDescriptionFragment extends Fragment implements TeamInterface.S
         fragmentPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(fragmentPagerAdapter);
 
-        getDB = new TeamPresenter(this, getContext());
-        getDB.getDB();
+        TeamInterface.RequestDB requestDB = new TeamPresenter(this, getContext());
+        requestDB.getDB();
 
         if (team != null){
             resources = new String[]{
@@ -63,12 +62,11 @@ public class TeamDescriptionFragment extends Fragment implements TeamInterface.S
             };
         }
 
-
          //Add all images to the ViewFlipper
 
-        for (int i = 0; i < resources.length; i++){
+        for (String resource : resources) {
             ImageView imageView = new ImageView(getContext());
-            Picasso.with(getContext()).load(resources[i]).fit().into(imageView);
+            Picasso.with(getContext()).load(resource).fit().into(imageView);
             viewFlipper.addView(imageView);
         }
 

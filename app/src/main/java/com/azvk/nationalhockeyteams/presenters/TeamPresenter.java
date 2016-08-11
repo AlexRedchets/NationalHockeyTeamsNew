@@ -16,10 +16,10 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class TeamPresenter implements TeamInterface.ViewPresenter, TeamInterface.RequestDB {
+public class TeamPresenter implements TeamInterface.TeamListViewPresenter, TeamInterface.RequestDB {
 
     private static final String TAG = TeamPresenter.class.getSimpleName();
-    private TeamInterface.PresenterView presenterView;
+    private TeamInterface.TeamListPresenterView presenterView;
     private TeamInterface.ResponseDB responseDB;
     private TeamInterface.SendDB sendDB;
     private List<Team> teamsList;
@@ -27,7 +27,7 @@ public class TeamPresenter implements TeamInterface.ViewPresenter, TeamInterface
     private Context context;
     private Team team;
 
-    public TeamPresenter(TeamInterface.PresenterView presenterView, Context context) {
+    public TeamPresenter(TeamInterface.TeamListPresenterView presenterView, Context context) {
         this.presenterView = presenterView;
         this.context = context;
     }
@@ -55,8 +55,6 @@ public class TeamPresenter implements TeamInterface.ViewPresenter, TeamInterface
     @Override
     public void getTeam() {
         Log.i(TAG, "getRoster started");
-
-        dbHandler = new DBHandler(context, null, null, 1);
 
         TeamClient teamClient = Generator.createService(TeamClient.class);
         Observable<List<Team>> teamObservable = teamClient.teams();

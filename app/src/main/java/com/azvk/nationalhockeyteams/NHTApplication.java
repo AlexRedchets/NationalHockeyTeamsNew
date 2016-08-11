@@ -1,3 +1,4 @@
+/*
 package com.azvk.nationalhockeyteams;
 
 import android.app.Application;
@@ -13,9 +14,9 @@ public class NHTApplication extends Application{
         super.onCreate();
         RealmConfiguration realmConfig = new RealmConfiguration
                 .Builder(this)
-                .name("rosters")
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfig);
     }
 }
+*/
