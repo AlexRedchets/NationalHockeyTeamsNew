@@ -8,14 +8,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 
+import com.azvk.nationalhockeyteams.NHTApplication;
 import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.SQLite.DBHandler;
+import com.azvk.nationalhockeyteams.interfaces.TeamInterface;
 import com.azvk.nationalhockeyteams.models.Team;
+import com.azvk.nationalhockeyteams.presenters.SplashPresenter;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements TeamInterface.ResponseDB{
 
-    private DBHandler dbHandler;
+
     private Team team;
+    private TeamInterface.RequestDB requestDB;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +31,11 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
 
-        dbHandler = new DBHandler(this, null, null, 1);
+        NHTApplication.setContext(this);
 
-        team = dbHandler.getTeam();
+        requestDB = new SplashPresenter(context, this);
+
+        requestDB.request();
 
         new Handler().postDelayed(new Runnable() {
             SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
@@ -49,5 +56,10 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         }, splash_time_out);
+    }
+
+    @Override
+    public void response(Team team) {
+        this.team = team;
     }
 }

@@ -15,4 +15,12 @@ public interface TeamInterface {
         void returnTeam(List<Team> teamsList);
         void errorServer(String error);
     }
+
+    interface RequestDB{
+        void request();
+    }
+
+    interface ResponseDB{
+        void response(Team team);
+    }
 }
