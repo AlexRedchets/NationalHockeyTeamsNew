@@ -1,28 +1,32 @@
+/*
 package com.azvk.nationalhockeyteams.presenters;
 
 import android.content.Context;
 
-import com.azvk.nationalhockeyteams.NHTApplication;
 import com.azvk.nationalhockeyteams.SQLite.DBHandler;
 import com.azvk.nationalhockeyteams.interfaces.TeamInterface;
 import com.azvk.nationalhockeyteams.models.Team;
 
 public class SplashPresenter implements TeamInterface.RequestDB{
 
-    TeamInterface.ResponseDB view;
-    Context context;
-    DBHandler dbHandler;
-    Team team;
+    private TeamInterface.ResponseDB view;
+    private Context context;
+    private DBHandler dbHandler;
+    private Team team;
 
-    public SplashPresenter(Context context, TeamInterface.ResponseDB view) {
-        this.context = context;
+    public SplashPresenter(TeamInterface.ResponseDB view, Context context) {
         this.view = view;
+        this.context = context;
     }
 
     @Override
     public void request() {
-        dbHandler = new DBHandler(NHTApplication.getContext(), null, null, 1);
+        dbHandler = new DBHandler(context, null, null, 1);
         team = dbHandler.getTeam();
-        view.response(team);
+        if (team.getName() != null )
+            view.response(true);
+        else
+            view.response(false);
     }
 }
+*/

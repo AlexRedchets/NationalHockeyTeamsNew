@@ -4,12 +4,16 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-public class NetworkState {
+public class Navigator {
 
     private Context context;
 
-    public NetworkState(Context context) {
+    public Navigator(Context context) {
         this.context = context;
+    }
+
+    public Context getContext() {
+        return context;
     }
 
     public boolean isNetworkAvailable() {

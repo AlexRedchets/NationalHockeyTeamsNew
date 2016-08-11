@@ -7,20 +7,19 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.Toast;
 
-import com.azvk.nationalhockeyteams.NHTApplication;
+import com.azvk.nationalhockeyteams.Navigator;
 import com.azvk.nationalhockeyteams.R;
-import com.azvk.nationalhockeyteams.SQLite.DBHandler;
 import com.azvk.nationalhockeyteams.interfaces.TeamInterface;
 import com.azvk.nationalhockeyteams.models.Team;
-import com.azvk.nationalhockeyteams.presenters.SplashPresenter;
+import com.azvk.nationalhockeyteams.presenters.TeamPresenter;
 
 public class SplashActivity extends AppCompatActivity implements TeamInterface.ResponseDB{
 
 
-    private Team team;
+    private boolean team;
     private TeamInterface.RequestDB requestDB;
-    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,22 +30,20 @@ public class SplashActivity extends AppCompatActivity implements TeamInterface.R
 
         setContentView(R.layout.activity_splash);
 
-        NHTApplication.setContext(this);
+        requestDB = new TeamPresenter(this, this);
 
-        requestDB = new SplashPresenter(context, this);
-
-        requestDB.request();
+        requestDB.isDBExists();
 
         new Handler().postDelayed(new Runnable() {
+
             SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
 
             @Override
             public void run() {
                 //checking if sharedPreferences file exists
                 if (sharedPref.contains("username") && (sharedPref.contains("password"))) {
-
-
                     Intent i = new Intent(SplashActivity.this, TeamInfoActivity.class);
+                    i.putExtra("team", team);
                     startActivity(i);
                     finish();
                 } else {
@@ -59,7 +56,7 @@ public class SplashActivity extends AppCompatActivity implements TeamInterface.R
     }
 
     @Override
-    public void response(Team team) {
+    public void responseDB(boolean team) {
         this.team = team;
     }
 }

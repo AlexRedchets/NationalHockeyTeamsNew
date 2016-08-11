@@ -5,34 +5,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
-import android.widget.ViewFlipper;
 
-import com.azvk.nationalhockeyteams.NetworkState;
 import com.azvk.nationalhockeyteams.R;
-import com.azvk.nationalhockeyteams.adapters.ViewPagerAdapter;
-import com.azvk.nationalhockeyteams.fragments.LoginFragment;
 import com.azvk.nationalhockeyteams.fragments.TeamDescriptionFragment;
 import com.azvk.nationalhockeyteams.fragments.TeamListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
-
-import static java.security.AccessController.getContext;
 
 public class TeamInfoActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -60,9 +46,24 @@ public class TeamInfoActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         if (savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_frame_main, new TeamListFragment())
-                    .commit();
+            Intent intent = getIntent();
+            if (intent.hasExtra("team")){
+                if (intent.getExtras().getBoolean("team")){
+                    getSupportFragmentManager().beginTransaction()
+                            .add(R.id.fragment_frame_main, new TeamDescriptionFragment())
+                            .commit();
+                }
+                else {
+                    getSupportFragmentManager().beginTransaction()
+                            .add(R.id.fragment_frame_main, new TeamListFragment())
+                            .commit();}
+            }
+
+            else {
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.fragment_frame_main, new TeamListFragment())
+                        .commit();
+            }
         }
     }
 

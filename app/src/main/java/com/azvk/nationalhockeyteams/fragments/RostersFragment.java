@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.azvk.nationalhockeyteams.NetworkState;
+import com.azvk.nationalhockeyteams.Navigator;
 import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.adapters.RostersAdapter;
 import com.azvk.nationalhockeyteams.interfaces.RostersInterface;
@@ -32,7 +32,7 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
 
     private Realm realm;
 
-    private NetworkState networkState;
+    private Navigator navigator;
 
     private RostersInterface.ViewPresenter viewPresenter;
 
@@ -48,7 +48,7 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         View view = inflater.inflate(R.layout.fragment_rosters, container, false);
 
         //check the connection to the Internet
-        networkState = new NetworkState(getActivity());
+        navigator = new Navigator(getActivity());
 
         //Seting up RecycleView and Adapter
         recyclerView = (RecyclerView)view.findViewById(R.id.rosterts_recycle_view);
@@ -73,7 +73,7 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         //if app launching at first time
         if (savedInstanceState == null) {
             Log.i(TAG, "savedInstanceState == null");
-            if (networkState.isNetworkAvailable()){
+            if (navigator.isNetworkAvailable()){
                 Log.i(TAG, "Network Available");
                 viewPresenter = new RostersPresenter(this);
                 viewPresenter.getRoster();
