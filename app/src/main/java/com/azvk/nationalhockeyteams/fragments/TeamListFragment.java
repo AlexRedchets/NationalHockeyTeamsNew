@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.azvk.nationalhockeyteams.R;
+import com.azvk.nationalhockeyteams.SQLite.DBHandler;
 import com.azvk.nationalhockeyteams.adapters.RostersAdapter;
 import com.azvk.nationalhockeyteams.adapters.TeamsAdapter;
 import com.azvk.nationalhockeyteams.interfaces.TeamInterface;
@@ -27,6 +28,7 @@ public class TeamListFragment extends Fragment implements TeamInterface.Presente
     private TeamsAdapter teamsAdapter;
     private List<Team> teamList;
     private TeamInterface.ViewPresenter viewPresenter;
+    private DBHandler dbHandler;
 
     @Nullable
     @Override
@@ -40,7 +42,7 @@ public class TeamListFragment extends Fragment implements TeamInterface.Presente
         teamsAdapter = new TeamsAdapter(getContext(), new TeamsAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(Team team) {
-                Toast.makeText(getContext(), team.getName(), Toast.LENGTH_SHORT).show();
+                viewPresenter.saveTeamDB(team);
             }
         });
         recyclerView.setAdapter(teamsAdapter);

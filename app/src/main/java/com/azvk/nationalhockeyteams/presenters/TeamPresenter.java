@@ -2,6 +2,7 @@ package com.azvk.nationalhockeyteams.presenters;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.azvk.nationalhockeyteams.Generator;
 import com.azvk.nationalhockeyteams.SQLite.DBHandler;
@@ -50,5 +51,12 @@ public class TeamPresenter implements TeamInterface.ViewPresenter {
                             Log.e(TAG + "ERROR: ", throwable.getMessage());
                             view.errorServer(throwable.getMessage());
                         });
+    }
+
+    @Override
+    public void saveTeamDB(Team team) {
+        dbHandler = new DBHandler(context, null, null, 1);
+        dbHandler.addTeam(team);
+        Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show();
     }
 }

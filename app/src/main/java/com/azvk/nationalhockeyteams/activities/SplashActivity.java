@@ -9,8 +9,13 @@ import android.os.Bundle;
 import android.view.Window;
 
 import com.azvk.nationalhockeyteams.R;
+import com.azvk.nationalhockeyteams.SQLite.DBHandler;
+import com.azvk.nationalhockeyteams.models.Team;
 
 public class SplashActivity extends AppCompatActivity {
+
+    private DBHandler dbHandler;
+    private Team team;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +26,19 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
 
-        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        dbHandler = new DBHandler(this, null, null, 1);
+
+        team = dbHandler.getTeam();
 
         new Handler().postDelayed(new Runnable() {
+            SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+
             @Override
             public void run() {
                 //checking if sharedPreferences file exists
                 if (sharedPref.contains("username") && (sharedPref.contains("password"))) {
+
+
                     Intent i = new Intent(SplashActivity.this, TeamInfoActivity.class);
                     startActivity(i);
                     finish();

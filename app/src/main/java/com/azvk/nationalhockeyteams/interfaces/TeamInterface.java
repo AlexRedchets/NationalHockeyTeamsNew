@@ -8,6 +8,7 @@ public interface TeamInterface {
 
     interface ViewPresenter{
         void getTeam();
+        void saveTeamDB(Team team);
     }
 
     interface PresenterView{
