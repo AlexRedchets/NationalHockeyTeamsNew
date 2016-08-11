@@ -8,10 +8,13 @@ import com.azvk.nationalhockeyteams.Generator;
 import com.azvk.nationalhockeyteams.SQLite.DBHandler;
 import com.azvk.nationalhockeyteams.client.TeamClient;
 import com.azvk.nationalhockeyteams.interfaces.TeamInterface;
+import com.azvk.nationalhockeyteams.models.Roster;
 import com.azvk.nationalhockeyteams.models.Team;
 
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -25,6 +28,7 @@ public class TeamPresenter implements TeamInterface.TeamListViewPresenter, TeamI
     private List<Team> teamsList;
     private DBHandler dbHandler;
     private Context context;
+    private Realm realm;
     private Team team;
 
     public TeamPresenter(TeamInterface.TeamListPresenterView presenterView, Context context) {
@@ -64,12 +68,44 @@ public class TeamPresenter implements TeamInterface.TeamListViewPresenter, TeamI
                 .subscribe(teamsData -> {
                             Log.i(TAG, "Downloading data from server: SUCCESS");
                             teamsList = teamsData;
+
+                            RealmConfiguration realmConfig = new RealmConfiguration
+                                    .Builder(context)
+                                    .name("teams")
+                                    .deleteRealmIfMigrationNeeded()
+                                    .build();
+                            Realm.setDefaultConfiguration(realmConfig);
+
+                            if (teamsList != null){
+                                //save data to DB
+                                realm = Realm.getDefaultInstance();
+                                realm.beginTransaction();
+                                if (realm != null){
+                                    realm.deleteAll();
+                                }
+                                realm.copyToRealmOrUpdate(teamsList);
+                                realm.commitTransaction();
+                            }
                             presenterView.returnTeam(teamsList);
                         },
                         throwable -> {
                             Log.e(TAG + "ERROR: ", throwable.getMessage());
                             presenterView.errorServer(throwable.getMessage());
                         });
+    }
+
+    @Override
+    public void getTeamListDB() {
+        RealmConfiguration realmConfig = new RealmConfiguration
+                .Builder(context)
+                .name("teams")
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(realmConfig);
+
+        realm = Realm.getDefaultInstance();
+        teamsList = realm.where(Team.class).findAll();
+        presenterView.returnTeamListDB(teamsList);
     }
 
     @Override

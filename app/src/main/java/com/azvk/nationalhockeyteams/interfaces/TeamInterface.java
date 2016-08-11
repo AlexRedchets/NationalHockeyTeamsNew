@@ -8,12 +8,14 @@ public interface TeamInterface {
 
     interface TeamListViewPresenter{
         void getTeam();
+        void getTeamListDB();
         void saveTeamDB(Team team);
     }
 
     interface TeamListPresenterView{
         void returnTeam(List<Team> teamsList);
         void errorServer(String error);
+        void returnTeamListDB(List<Team> teamsList);
     }
 
     interface RequestDB{
