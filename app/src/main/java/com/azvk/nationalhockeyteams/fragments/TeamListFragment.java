@@ -41,7 +41,7 @@ public class TeamListFragment extends Fragment implements TeamInterface.Presente
         recyclerView.setAdapter(teamsAdapter);
 
         //get info from database
-        viewPresenter = new TeamPresenter(this);
+        viewPresenter = new TeamPresenter(this, getContext());
         viewPresenter.getTeam();
 
         return view;

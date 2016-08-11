@@ -38,6 +38,7 @@ public class RostersPresenter implements RostersInterface.ViewPresenter {
                 .subscribe(rostersData -> {
                             Log.i(TAG, "Downloading data from server: SUCCESS");
                             rosterList = rostersData;
+
                             //save data to DB
                             realm = Realm.getDefaultInstance();
                             realm.beginTransaction();

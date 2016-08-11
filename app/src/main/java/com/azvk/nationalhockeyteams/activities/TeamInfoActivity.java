@@ -61,7 +61,7 @@ public class TeamInfoActivity extends AppCompatActivity
 
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_frame_main, new TeamDescriptionFragment())
+                    .add(R.id.fragment_frame_main, new TeamListFragment())
                     .commit();
         }
     }

@@ -1,8 +1,10 @@
 package com.azvk.nationalhockeyteams.presenters;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.azvk.nationalhockeyteams.Generator;
+import com.azvk.nationalhockeyteams.SQLite.DBHandler;
 import com.azvk.nationalhockeyteams.client.RostersClient;
 import com.azvk.nationalhockeyteams.client.TeamClient;
 import com.azvk.nationalhockeyteams.interfaces.TeamInterface;
@@ -20,14 +22,19 @@ public class TeamPresenter implements TeamInterface.ViewPresenter {
     private TeamInterface.PresenterView view;
     private static final String TAG = TeamPresenter.class.getSimpleName();
     private List<Team> teamsList;
+    private DBHandler dbHandler;
+    private Context context;
 
-    public TeamPresenter(TeamInterface.PresenterView view) {
+    public TeamPresenter(TeamInterface.PresenterView view, Context context) {
         this.view = view;
+        this.context = context;
     }
 
     @Override
     public void getTeam() {
         Log.i(TAG, "getRoster started");
+
+        dbHandler = new DBHandler(context, null, null, 1);
 
         TeamClient teamClient = Generator.createService(TeamClient.class);
         Observable<List<Team>> teamObservable = teamClient.teams();
