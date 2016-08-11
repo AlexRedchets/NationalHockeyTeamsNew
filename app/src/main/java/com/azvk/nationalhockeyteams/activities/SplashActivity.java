@@ -7,12 +7,9 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
-import android.widget.Toast;
 
-import com.azvk.nationalhockeyteams.Navigator;
 import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.interfaces.TeamInterface;
-import com.azvk.nationalhockeyteams.models.Team;
 import com.azvk.nationalhockeyteams.presenters.TeamPresenter;
 
 public class SplashActivity extends AppCompatActivity implements TeamInterface.ResponseDB{
@@ -31,7 +28,6 @@ public class SplashActivity extends AppCompatActivity implements TeamInterface.R
         setContentView(R.layout.activity_splash);
 
         requestDB = new TeamPresenter(this, this);
-
         requestDB.isDBExists();
 
         new Handler().postDelayed(new Runnable() {

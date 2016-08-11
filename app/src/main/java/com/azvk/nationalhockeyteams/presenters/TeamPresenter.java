@@ -6,10 +6,8 @@ import android.widget.Toast;
 
 import com.azvk.nationalhockeyteams.Generator;
 import com.azvk.nationalhockeyteams.SQLite.DBHandler;
-import com.azvk.nationalhockeyteams.client.RostersClient;
 import com.azvk.nationalhockeyteams.client.TeamClient;
 import com.azvk.nationalhockeyteams.interfaces.TeamInterface;
-import com.azvk.nationalhockeyteams.models.Roster;
 import com.azvk.nationalhockeyteams.models.Team;
 
 import java.util.List;
@@ -18,12 +16,12 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class TeamPresenter implements TeamInterface.ViewPresenter, TeamInterface.RequestDB, TeamInterface.GetDB {
+public class TeamPresenter implements TeamInterface.ViewPresenter, TeamInterface.RequestDB {
 
+    private static final String TAG = TeamPresenter.class.getSimpleName();
     private TeamInterface.PresenterView presenterView;
     private TeamInterface.ResponseDB responseDB;
     private TeamInterface.SendDB sendDB;
-    private static final String TAG = TeamPresenter.class.getSimpleName();
     private List<Team> teamsList;
     private DBHandler dbHandler;
     private Context context;
@@ -45,6 +43,7 @@ public class TeamPresenter implements TeamInterface.ViewPresenter, TeamInterface
     }
 
     public void isDBExists() {
+        Log.i(TAG, "isDBExists started");
         dbHandler = new DBHandler(context, null, null, 1);
         team = dbHandler.getTeam();
         if (team.getName() != null )
@@ -52,8 +51,6 @@ public class TeamPresenter implements TeamInterface.ViewPresenter, TeamInterface
         else
             responseDB.responseDB(false);
     }
-
-
 
     @Override
     public void getTeam() {
@@ -79,6 +76,7 @@ public class TeamPresenter implements TeamInterface.ViewPresenter, TeamInterface
 
     @Override
     public void saveTeamDB(Team team) {
+        Log.i(TAG, "saveTeamDB started");
         dbHandler = new DBHandler(context, null, null, 1);
         dbHandler.addTeam(team);
         Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show();
@@ -86,6 +84,7 @@ public class TeamPresenter implements TeamInterface.ViewPresenter, TeamInterface
 
     @Override
     public void getDB() {
+        Log.i(TAG, "getDB started");
         dbHandler = new DBHandler(context, null, null, 1);
         team = dbHandler.getTeam();
         sendDB.sendDB(team);

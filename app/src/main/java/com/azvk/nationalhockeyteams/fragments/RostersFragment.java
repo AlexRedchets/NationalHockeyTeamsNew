@@ -30,8 +30,6 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
     private RostersAdapter rostersAdapter;
     private List<Roster> rosterList;
 
-    private Realm realm;
-
     private Navigator navigator;
 
     private RostersInterface.ViewPresenter viewPresenter;

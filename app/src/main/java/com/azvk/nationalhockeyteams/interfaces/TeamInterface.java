@@ -18,15 +18,16 @@ public interface TeamInterface {
 
     interface RequestDB{
         void isDBExists();
+        void getDB();
     }
 
     interface ResponseDB{
         void responseDB(boolean team);
     }
 
-    interface GetDB{
+   /* interface GetDB{
         void getDB();
-    }
+    }*/
 
     interface SendDB{
         void sendDB(Team team);
