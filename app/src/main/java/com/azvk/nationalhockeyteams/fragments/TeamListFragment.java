@@ -37,7 +37,12 @@ public class TeamListFragment extends Fragment implements TeamInterface.Presente
         recyclerView = (RecyclerView)view.findViewById(R.id.team_recycle_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        teamsAdapter = new TeamsAdapter(getContext()) ;
+        teamsAdapter = new TeamsAdapter(getContext(), new TeamsAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClick(Team team) {
+                Toast.makeText(getContext(), team.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
         recyclerView.setAdapter(teamsAdapter);
 
         //get info from database

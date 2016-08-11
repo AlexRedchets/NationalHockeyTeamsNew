@@ -23,9 +23,15 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.ViewHolder> 
     private List<Team> listTeam;
     private Context context;
     private String TAG = TeamsAdapter.class.getSimpleName();
+    private OnItemClickListener listener;
 
-    public TeamsAdapter(Context context) {
+    public interface OnItemClickListener {
+        void onItemClick(Team team);
+    }
+
+    public TeamsAdapter(Context context, OnItemClickListener listener) {
         this.context = context;
+        this.listener = listener;
     }
 
     public void updateAdapter(List<Team> lists){
@@ -62,6 +68,8 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+        holder.bind(listTeam.get(position), listener);
+
         Team currentTeamData = listTeam.get(position);
 
         holder.teamName.setText(currentTeamData.getName());
@@ -78,6 +86,16 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.ViewHolder> 
         private ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+
+        public void bind(final Team team, final OnItemClickListener listener) {
+            teamName.setText(team.getName());
+            Picasso.with(itemView.getContext()).load(team.getFlag()).into(teamImage);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    listener.onItemClick(team);
+                }
+            });
         }
     }
 }
