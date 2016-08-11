@@ -57,7 +57,7 @@ public class TeamPresenter implements TeamInterface.TeamListViewPresenter, TeamI
     }
 
     @Override
-    public void getTeam() {
+    public void getTeamList() {
         Log.i(TAG, "getRoster started");
 
         TeamClient teamClient = Generator.createService(TeamClient.class);

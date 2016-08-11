@@ -7,7 +7,7 @@ import java.util.List;
 public interface TeamInterface {
 
     interface TeamListViewPresenter{
-        void getTeam();
+        void getTeamList();
         void getTeamListDB();
         void saveTeamDB(Team team);
     }

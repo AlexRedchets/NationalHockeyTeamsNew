@@ -64,10 +64,10 @@ public class TeamListFragment extends Fragment implements TeamInterface.TeamList
             Log.i(TAG, "savedInstanceState == null");
             if (navigator.isNetworkAvailable()){
                 Log.i(TAG, "Network Available");
-                viewPresenter = new RostersPresenter(this, getContext());
-                viewPresenter.getRoster();
+                teamListViewPresenter = new TeamPresenter(this, getContext());
+                teamListViewPresenter.getTeamList();
             }
-            else if (rosterList.isEmpty()) {
+            else if (teamList.isEmpty()) {
                 Log.i(TAG, "No connection to the Intenet and no info in DB");
                 Snackbar.make(view, R.string.network_error,
                         Snackbar.LENGTH_LONG)
@@ -75,11 +75,11 @@ public class TeamListFragment extends Fragment implements TeamInterface.TeamList
             }
             else{
                 Log.i(TAG, "No connection to the Intenet, get info from DB");
-                rostersAdapter.updateAdapter(rosterList);
+                teamsAdapter.updateAdapter(teamList);
             }
         } else {
             Log.i(TAG, "savedInstanceState NOT null");
-            if (rosterList.isEmpty()){
+            if (teamList.isEmpty()){
                 Log.i(TAG, "No connection to the Intenet and no info in DB");
                 Snackbar.make(view, R.string.network_error,
                         Snackbar.LENGTH_LONG)
@@ -87,7 +87,7 @@ public class TeamListFragment extends Fragment implements TeamInterface.TeamList
             }
             else{
                 Log.i(TAG, "No connection to the Intenet, get info from DB");
-                rostersAdapter.updateAdapter(rosterList);
+                teamsAdapter.updateAdapter(teamList);
             }
         }
     }
