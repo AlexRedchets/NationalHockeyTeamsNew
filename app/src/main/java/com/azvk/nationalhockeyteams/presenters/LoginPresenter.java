@@ -1,5 +1,7 @@
 package com.azvk.nationalhockeyteams.presenters;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.azvk.nationalhockeyteams.Generator;
@@ -11,15 +13,19 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static java.security.AccessController.getContext;
+
 
 public class LoginPresenter implements UserInterface.LoginViewPresenter{
 
     private static final String TAG = LoginPresenter.class.getSimpleName();
     private UserInterface.LoginPresenterView view;
+    private Context context;
     private User user;
 
-    public LoginPresenter(UserInterface.LoginPresenterView view) {
+    public LoginPresenter(UserInterface.LoginPresenterView view, Context context) {
         this.view = view;
+        this.context = context;
     }
 
     public void loginUser(String username, String password) {
@@ -34,6 +40,7 @@ public class LoginPresenter implements UserInterface.LoginViewPresenter{
                 .subscribe(userData -> {
                     if (userData){
                     Log.i(TAG, "Login successful");
+                    saveUserInfoSharePref(username, password);
                     view.userAuthSuccess(true);
                 } else{
                     Log.i(TAG, "Login UNsuccessful");
@@ -44,5 +51,15 @@ public class LoginPresenter implements UserInterface.LoginViewPresenter{
                         Log.e("Error", throwable.getMessage());
                         view.errorServer(throwable.getMessage());
                     });
+    }
+
+    private void saveUserInfoSharePref(String username, String password) {
+        //save username and password into shared preferences
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                "userInfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("username", username);
+        editor.putString("password", password);
+        editor.apply();
     }
 }

@@ -55,7 +55,7 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
             Navigator navigator = new Navigator(getContext());
             if(navigator.isNetworkAvailable()){
                 //if there is internet connection
-                UserInterface.LoginViewPresenter viewPresenter = new LoginPresenter(this);
+                UserInterface.LoginViewPresenter viewPresenter = new LoginPresenter(this, getContext());
                 viewPresenter.loginUser(inputName.getText().toString(), inputPassword.getText().toString());}
             else{
                 //if there is not internet connection
@@ -88,14 +88,6 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
         if (user){
             Log.i(TAG, "Authorization: Success");
             Toast.makeText(getContext(), "User found", Toast.LENGTH_SHORT).show();
-
-            //save username and password into shared preferences
-            SharedPreferences sharedPref = getContext().getSharedPreferences(
-                    "userInfo", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("username", inputName.getText().toString());
-            editor.putString("password", inputPassword.getText().toString());
-            editor.apply();
 
             Intent intent = new Intent(getContext(), TeamInfoActivity.class);
             startActivity(intent);

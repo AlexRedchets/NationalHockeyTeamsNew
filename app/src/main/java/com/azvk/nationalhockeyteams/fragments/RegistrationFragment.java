@@ -70,7 +70,7 @@ public class RegistrationFragment extends Fragment implements UserInterface.Regi
 
                 if (isNetworkAvailable()){
                     //if there is internet connection
-                    viewPresenter = new RegistrationPresenter(this);
+                    viewPresenter = new RegistrationPresenter(this, getContext());
                     viewPresenter.registerUser(inputName.getText().toString(), inputPassword.getText().toString());
                     break;
                 } else{
@@ -119,14 +119,6 @@ public class RegistrationFragment extends Fragment implements UserInterface.Regi
             case 2:
                 Log.i(TAG, "User added");
                 Toast.makeText(getContext(), "userAdded", Toast.LENGTH_SHORT).show();
-
-                //save username and password into shared preferences
-                SharedPreferences sharedPref = getContext().getSharedPreferences(
-                        "userInfo", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("username", inputName.getText().toString());
-                editor.putString("password", inputPassword.getText().toString());
-                editor.apply();
 
                 Intent intent = new Intent(getContext(), TeamInfoActivity.class);
                 startActivity(intent);

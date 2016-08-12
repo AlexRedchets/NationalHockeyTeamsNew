@@ -1,4 +1,5 @@
 /*
+
 package com.azvk.nationalhockeyteams;
 
 import android.app.Application;
@@ -9,14 +10,15 @@ import io.realm.RealmConfiguration;
 
 public class NHTApplication extends Application{
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        RealmConfiguration realmConfig = new RealmConfiguration
-                .Builder(this)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        Realm.setDefaultConfiguration(realmConfig);
+    private static Context mContext;
+
+    public static Context getContext() {
+        return mContext;
+    }
+
+    public static void setContext(Context mContext) {
+        this.mContext = mContext;
     }
 }
+
 */

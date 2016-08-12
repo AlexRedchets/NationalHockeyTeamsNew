@@ -1,5 +1,7 @@
 package com.azvk.nationalhockeyteams.presenters;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.azvk.nationalhockeyteams.Generator;
@@ -15,10 +17,12 @@ public class RegistrationPresenter implements UserInterface.RegistrationViewPres
 
     private static final String TAG = RegistrationPresenter.class.getSimpleName();
     private UserInterface.RegistrationPresenterView view;
+    private Context context;
     private User user;
 
-    public RegistrationPresenter(UserInterface.RegistrationPresenterView view) {
+    public RegistrationPresenter(UserInterface.RegistrationPresenterView view, Context context) {
         this.view = view;
+        this.context = context;
     }
 
     @Override
@@ -43,6 +47,7 @@ public class RegistrationPresenter implements UserInterface.RegistrationViewPres
                                     break;
                                 case "2":
                                     Log.i(TAG, "User added");
+                                    saveUserInfoSharePref(username, password);
                                     view.registerAuthComplete(2);
                                     break;
                             }
@@ -51,5 +56,15 @@ public class RegistrationPresenter implements UserInterface.RegistrationViewPres
                             Log.e("Error", throwable.getMessage());
                             view.errorServer(throwable.getMessage());
                         });
+    }
+
+    private void saveUserInfoSharePref(String username, String password) {
+        //save username and password into shared preferences
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                "userInfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("username", username);
+        editor.putString("password", password);
+        editor.apply();
     }
 }
