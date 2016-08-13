@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.azvk.nationalhockeyteams.Navigator;
@@ -32,6 +33,8 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
     EditText inputName;
     @BindView(R.id.input_password_login)
     EditText inputPassword;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     public LoginFragment() {}
 
@@ -42,6 +45,7 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         ButterKnife.bind(this, view);
+        progressBar.setVisibility(ProgressBar.INVISIBLE);
         return view;
     }
 
@@ -55,6 +59,7 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
             Navigator navigator = new Navigator(getContext());
             if(navigator.isNetworkAvailable()){
                 //if there is internet connection
+                progressBar.setVisibility(ProgressBar.VISIBLE);
                 UserInterface.LoginViewPresenter viewPresenter = new LoginPresenter(this, getContext());
                 viewPresenter.loginUser(inputName.getText().toString(), inputPassword.getText().toString());}
             else{
@@ -86,6 +91,7 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
 
     public void userAuthSuccess(boolean user){
         if (user){
+            progressBar.setVisibility(ProgressBar.INVISIBLE);
             Log.i(TAG, "Authorization: Success");
             Toast.makeText(getContext(), "User found", Toast.LENGTH_SHORT).show();
 
@@ -94,6 +100,7 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
             getActivity().finish();
         }
         else {
+            progressBar.setVisibility(ProgressBar.INVISIBLE);
             Log.i(TAG, "Authorization: User not found");
             Toast.makeText(getContext(), "User NOT found", Toast.LENGTH_SHORT).show();
         }
@@ -101,6 +108,7 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
 
     @Override
     public void errorServer(String error) {
+        progressBar.setVisibility(ProgressBar.INVISIBLE);
         Log.i(TAG, "Authorization: Server error");
         Toast.makeText(getContext(), "Enable to connect server. Try later", Toast.LENGTH_LONG).show();
     }

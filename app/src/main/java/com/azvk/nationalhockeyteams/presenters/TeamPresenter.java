@@ -9,7 +9,6 @@ import com.azvk.nationalhockeyteams.Generator;
 import com.azvk.nationalhockeyteams.SQLite.DBHandler;
 import com.azvk.nationalhockeyteams.client.TeamClient;
 import com.azvk.nationalhockeyteams.interfaces.TeamInterface;
-import com.azvk.nationalhockeyteams.models.Roster;
 import com.azvk.nationalhockeyteams.models.Team;
 
 import java.util.List;
