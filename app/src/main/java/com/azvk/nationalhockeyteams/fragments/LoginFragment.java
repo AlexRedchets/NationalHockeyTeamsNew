@@ -1,8 +1,6 @@
 package com.azvk.nationalhockeyteams.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -33,7 +31,7 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
     EditText inputName;
     @BindView(R.id.input_password_login)
     EditText inputPassword;
-    @BindView(R.id.progress_bar)
+    @BindView(R.id.login_progress_bar)
     ProgressBar progressBar;
 
     public LoginFragment() {}
@@ -46,6 +44,7 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
 
         ButterKnife.bind(this, view);
         progressBar.setVisibility(ProgressBar.INVISIBLE);
+
         return view;
     }
 

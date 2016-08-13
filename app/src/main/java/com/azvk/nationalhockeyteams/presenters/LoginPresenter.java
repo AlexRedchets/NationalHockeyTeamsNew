@@ -21,7 +21,6 @@ public class LoginPresenter implements UserInterface.LoginViewPresenter{
     private static final String TAG = LoginPresenter.class.getSimpleName();
     private UserInterface.LoginPresenterView view;
     private Context context;
-    private User user;
 
     public LoginPresenter(UserInterface.LoginPresenterView view, Context context) {
         this.view = view;
@@ -30,7 +29,7 @@ public class LoginPresenter implements UserInterface.LoginViewPresenter{
 
     public void loginUser(String username, String password) {
 
-        user = new User(username, password);
+        User user = new User(username, password);
 
         UserClient userClient = Generator.createService(UserClient.class);
         Observable<Boolean> userObservable = userClient.userLogin(user);
