@@ -21,15 +21,13 @@ public interface TeamInterface {
     interface RequestDB{
         void isDBExists();
         void getDB();
+        void checkSharePref();
     }
 
     interface ResponseDB{
         void responseDB(boolean team);
+        void responseSharePref(boolean sharpref);
     }
-
-   /* interface GetDB{
-        void getDB();
-    }*/
 
     interface SendDB{
         void sendDB(Team team);

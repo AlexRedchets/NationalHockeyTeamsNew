@@ -17,6 +17,7 @@ public class SplashActivity extends AppCompatActivity implements TeamInterface.R
 
     private static final String TAG = SplashActivity.class.getSimpleName();
     private boolean team;
+    private boolean sharpref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,26 +31,21 @@ public class SplashActivity extends AppCompatActivity implements TeamInterface.R
 
         TeamInterface.RequestDB requestDB = new TeamPresenter(this, this);
         requestDB.isDBExists();
+        requestDB.checkSharePref();
 
-        new Handler().postDelayed(new Runnable() {
-
-            SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-
-            @Override
-            public void run() {
-                //checking if sharedPreferences file exists
-                if (sharedPref.contains("username") && (sharedPref.contains("password"))) {
-                    Log.i(TAG, "SharePref contains username and password");
-                    Intent i = new Intent(SplashActivity.this, TeamInfoActivity.class);
-                    i.putExtra("team", team);
-                    startActivity(i);
-                    finish();
-                } else {
-                    Log.i(TAG, "no username and password in SharePref");
-                    Intent i = new Intent(SplashActivity.this, LoginActivity.class);
-                    startActivity(i);
-                    finish();
-                }
+        new Handler().postDelayed(() -> {
+            //checking if sharedPreferences file exists
+            if (sharpref) {
+                Log.i(TAG, "SharePref contains username and password");
+                Intent i = new Intent(SplashActivity.this, TeamInfoActivity.class);
+                i.putExtra("team", team);
+                startActivity(i);
+                finish();
+            } else {
+                Log.i(TAG, "no username and password in SharePref");
+                Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
             }
         }, splash_time_out);
     }
@@ -58,5 +54,11 @@ public class SplashActivity extends AppCompatActivity implements TeamInterface.R
     public void responseDB(boolean team) {
         Log.i(TAG, "responseDB started");
         this.team = team;
+    }
+
+    @Override
+    public void responseSharePref(boolean sharpref) {
+        Log.i(TAG, "responseSharePref started");
+        this.sharpref = sharpref;
     }
 }

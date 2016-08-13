@@ -1,6 +1,7 @@
 package com.azvk.nationalhockeyteams.presenters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -122,5 +123,16 @@ public class TeamPresenter implements TeamInterface.TeamListViewPresenter, TeamI
         dbHandler = new DBHandler(context, null, null, 1);
         team = dbHandler.getTeam();
         sendDB.sendDB(team);
+    }
+
+    @Override
+    public void checkSharePref() {
+        SharedPreferences sharedPref = context.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        if (sharedPref.contains("username") && (sharedPref.contains("password"))){
+            responseDB.responseSharePref(true);
+        }
+        else {
+            responseDB.responseSharePref(false);
+        }
     }
 }
