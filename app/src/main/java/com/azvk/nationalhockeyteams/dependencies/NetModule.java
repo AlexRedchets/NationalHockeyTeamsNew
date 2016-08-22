@@ -40,12 +40,4 @@ public class NetModule {
                 .addCallAdapterFactory(rxJavaCallAdapterFactory)
                 .build();
     }
-
-    private void make (GsonConverterFactory gsonConverterFactory){
-
-    }
-
-    private void make (RxJavaCallAdapterFactory rxJavaCallAdapterFactory){
-
-    }
 }
