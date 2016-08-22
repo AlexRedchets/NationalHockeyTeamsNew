@@ -19,13 +19,23 @@ public class NetModule {
         this.baseUrl = baseUrl;
     }
 
+
+
     @Provides
     @Singleton
-    Retrofit provideRetrofit(Application application){
+    Retrofit provideRetrofit(GsonConverterFactory gsonConverterFactory, RxJavaCallAdapterFactory rxJavaCallAdapterFactory){
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(gsonConverterFactory)
+                .addCallAdapterFactory(rxJavaCallAdapterFactory)
                 .build();
+    }
+
+    private void make (GsonConverterFactory gsonConverterFactory){
+
+    }
+
+    private void make (RxJavaCallAdapterFactory rxJavaCallAdapterFactory){
+
     }
 }
