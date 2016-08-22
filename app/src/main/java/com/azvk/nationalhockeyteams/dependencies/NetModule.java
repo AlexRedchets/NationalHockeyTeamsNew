@@ -19,7 +19,17 @@ public class NetModule {
         this.baseUrl = baseUrl;
     }
 
+    @Provides
+    @Singleton
+    RxJavaCallAdapterFactory provideRxJavaCallAdapterFactory(){
+        return RxJavaCallAdapterFactory.create();
+    }
 
+    @Provides
+    @Singleton
+    GsonConverterFactory provideGsonConverterFactory(){
+        return GsonConverterFactory.create();
+    }
 
     @Provides
     @Singleton
