@@ -18,7 +18,6 @@ public class RegistrationPresenter implements UserInterface.RegistrationViewPres
     private static final String TAG = RegistrationPresenter.class.getSimpleName();
     private UserInterface.RegistrationPresenterView view;
     private Context context;
-    private User user;
 
     public RegistrationPresenter(UserInterface.RegistrationPresenterView view, Context context) {
         this.view = view;
@@ -28,7 +27,8 @@ public class RegistrationPresenter implements UserInterface.RegistrationViewPres
     @Override
     public void registerUser(String username, String password) {
         Log.i(TAG, "registerUser started");
-        user = new User(username, password);
+
+        User user = new User(username, password);
         UserClient userClient = Generator.createService(UserClient.class);
         Observable<String> userObservable = userClient.userRegistration(user);
         userObservable

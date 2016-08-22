@@ -16,6 +16,7 @@ public interface TeamInterface {
         void returnTeam(List<Team> teamsList);
         void errorServer(String error);
         void returnTeamListDB(List<Team> teamsList);
+        void runTeamInfo();
     }
 
     interface RequestDB{

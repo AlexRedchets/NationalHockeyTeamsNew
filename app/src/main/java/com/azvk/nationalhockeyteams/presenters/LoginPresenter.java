@@ -38,13 +38,13 @@ public class LoginPresenter implements UserInterface.LoginViewPresenter{
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(userData -> {
                     if (userData){
-                    Log.i(TAG, "Login successful");
-                    saveUserInfoSharePref(username, password);
-                    view.userAuthSuccess(true);
-                } else{
-                    Log.i(TAG, "Login UNsuccessful");
-                    view.userAuthSuccess(false);
-                }
+                        Log.i(TAG, "Login successful");
+                        saveUserInfoSharePref(username, password);
+                        view.userAuthSuccess(true);
+                    }else{
+                        Log.i(TAG, "Login UNsuccessful");
+                        view.userAuthSuccess(false);
+                    }
                 },
                     throwable -> {
                         Log.e("Error", throwable.getMessage());

@@ -1,5 +1,6 @@
 package com.azvk.nationalhockeyteams.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.azvk.nationalhockeyteams.Navigator;
 import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.SQLite.DBHandler;
+import com.azvk.nationalhockeyteams.activities.TeamInfoActivity;
 import com.azvk.nationalhockeyteams.adapters.TeamsAdapter;
 import com.azvk.nationalhockeyteams.interfaces.TeamInterface;
 import com.azvk.nationalhockeyteams.models.Team;
@@ -112,5 +114,12 @@ public class TeamListFragment extends Fragment implements TeamInterface.TeamList
             Log.i(TAG, "Database is NOT empty");
         }
         this.teamList = teamsList;
+    }
+
+    @Override
+    public void runTeamInfo() {
+        Intent intent = new Intent(getActivity(), TeamInfoActivity.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 }

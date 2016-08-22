@@ -114,6 +114,7 @@ public class TeamPresenter implements TeamInterface.TeamListViewPresenter, TeamI
         dbHandler = new DBHandler(context, null, null, 1);
         dbHandler.addTeam(team);
         Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show();
+        presenterView.runTeamInfo();
     }
 
     @Override
