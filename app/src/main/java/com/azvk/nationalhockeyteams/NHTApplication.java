@@ -17,8 +17,12 @@ public class NHTApplication extends Application {
 
     private void resolveDependencies() {
         ApiComponent apiComponent = DaggerApiComponent.builder()
+                .netComponent(getNetComponent())
                 .build();
-        NetComponent netComponent = DaggerNetComponent.builder()
+    }
+
+    private NetComponent getNetComponent() {
+        return DaggerNetComponent.builder()
                 .build();
     }
 }
