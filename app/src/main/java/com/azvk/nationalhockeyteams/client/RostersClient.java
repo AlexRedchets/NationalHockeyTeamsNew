@@ -11,7 +11,7 @@ import rx.Observable;
 public interface RostersClient {
 
     @GET("api/player/{team}")
-    Observable<List<Roster>> rosters(
+    Observable<List<Roster>> getRosters(
             @Path("team") String team
     );
 }

@@ -39,7 +39,7 @@ public class RostersPresenter implements RostersInterface.ViewPresenter {
         Log.i(TAG, "getRoster started");
 
         RostersClient rostersClient = Generator.createService(RostersClient.class);
-        Observable<List<Roster>> rostersObservable = rostersClient.rosters("Russia");
+        Observable<List<Roster>> rostersObservable = rostersClient.getRosters("Russia");
         rostersObservable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
