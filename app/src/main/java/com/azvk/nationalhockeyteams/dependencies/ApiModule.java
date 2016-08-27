@@ -1,5 +1,6 @@
 package com.azvk.nationalhockeyteams.dependencies;
 
+import com.azvk.nationalhockeyteams.client.RostersClient;
 import com.azvk.nationalhockeyteams.models.Roster;
 
 import dagger.Module;
@@ -11,7 +12,7 @@ public class ApiModule {
 
     @Provides
     @CustomScope
-    Roster provideRoster(Retrofit retrofit){
-        return retrofit.create(Roster.class);
+    RostersClient provideRoster(Retrofit retrofit){
+        return retrofit.create(RostersClient.class);
     }
 }
