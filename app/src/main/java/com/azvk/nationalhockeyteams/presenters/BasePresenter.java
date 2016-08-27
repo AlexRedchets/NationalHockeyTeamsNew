@@ -51,7 +51,9 @@ public abstract class BasePresenter implements Presenter {
         Subscription subscription = observable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.computation())
                 .subscribe();
+        configureCompositeSubscription().add(subscription);
     }
 
 }
