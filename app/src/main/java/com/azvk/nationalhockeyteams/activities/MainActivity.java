@@ -2,6 +2,7 @@ package com.azvk.nationalhockeyteams.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 
 import com.azvk.nationalhockeyteams.NHTApplication;
 import com.azvk.nationalhockeyteams.R;
@@ -14,12 +15,16 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import rx.Observable;
 
 public class MainActivity extends AppCompatActivity implements RosterViewInterface {
 
     @Inject
     RostersClient rostersClient;
+    @BindView(R.id.rosterts_recycle_view)
+    RecyclerView recyclerView;
 
     private RosterPresenter rosterPresenter;
 
@@ -31,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements RosterViewInterfa
         ((NHTApplication)getApplication())
                 .getApiComponent()
                 .inject(this);
+
+        ButterKnife.bind(this);
 
         rosterPresenter = new RosterPresenter(this);
         rosterPresenter.onCreate();
