@@ -2,10 +2,13 @@ package com.azvk.nationalhockeyteams.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.azvk.nationalhockeyteams.NHTApplication;
 import com.azvk.nationalhockeyteams.R;
+import com.azvk.nationalhockeyteams.adapters.RostersAdapter;
 import com.azvk.nationalhockeyteams.client.RostersClient;
 import com.azvk.nationalhockeyteams.interfaces.RosterViewInterface;
 import com.azvk.nationalhockeyteams.models.Roster;
@@ -27,20 +30,36 @@ public class MainActivity extends AppCompatActivity implements RosterViewInterfa
     RecyclerView recyclerView;
 
     private RosterPresenter rosterPresenter;
+    private RostersAdapter rostersAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ((NHTApplication)getApplication())
-                .getApiComponent()
-                .inject(this);
+        resolveDependencies();
 
-        ButterKnife.bind(this);
+        configView();
 
         rosterPresenter = new RosterPresenter(this);
         rosterPresenter.onCreate();
+    }
+
+    private void resolveDependencies() {
+        ((NHTApplication)getApplication())
+                .getApiComponent()
+                .inject(this);
+    }
+
+    private void configView() {
+        ButterKnife.bind(this);
+
+        recyclerView.setRecycledViewPool(new RecyclerView.RecycledViewPool());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        recyclerView.setAdapter(rostersAdapter);
     }
 
     @Override
