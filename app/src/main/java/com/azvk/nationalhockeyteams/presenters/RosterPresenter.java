@@ -28,17 +28,22 @@ public class RosterPresenter extends BasePresenter implements Observer<List<Rost
 
     @Override
     public void onCompleted() {
-        rosterViewInterface.completed();
+        rosterViewInterface.onCompleted();
     }
 
     @Override
     public void onError(Throwable e) {
-        rosterViewInterface.error(e.getMessage());
+        rosterViewInterface.onError(e.getMessage());
     }
 
     @Override
     public void onNext(List<Roster> rosters) {
+        rosterViewInterface.onRoster(rosters);
+    }
 
+    public void fetchRoster() {
+        unsubscribeAll();
+        subscribe(rosterViewInterface.getRosters(), this);
     }
 
     /*private static final String TAG = RostersPresenter.class.getSimpleName();

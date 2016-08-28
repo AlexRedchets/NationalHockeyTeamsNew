@@ -1,7 +1,5 @@
 package com.azvk.nationalhockeyteams.presenters;
 
-import android.support.annotation.MainThread;
-
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -40,7 +38,7 @@ public abstract class BasePresenter implements Presenter {
         unsubscribeAll();
     }
 
-    private void unsubscribeAll() {
+    protected void unsubscribeAll() {
         if (compositeSubscription != null) {
             compositeSubscription.unsubscribe();
             compositeSubscription = null;
@@ -52,7 +50,7 @@ public abstract class BasePresenter implements Presenter {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.computation())
-                .subscribe();
+                .subscribe(observer);
         configureCompositeSubscription().add(subscription);
     }
 

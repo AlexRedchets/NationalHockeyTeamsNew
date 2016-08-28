@@ -32,9 +32,6 @@ public class SplashActivity extends AppCompatActivity implements TeamInterface.R
 
         int splash_time_out = 3000;
 
-        ((NHTApplication)getApplication())
-                .getApiComponent()
-                .inject(this);
 
         /*this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -45,6 +42,10 @@ public class SplashActivity extends AppCompatActivity implements TeamInterface.R
         requestDB.checkSharePref();*/
 
         new Handler().postDelayed(() -> {
+            Intent i = new Intent(SplashActivity.this, TeamInfoActivity.class);
+            i.putExtra("team", team);
+            startActivity(i);
+            finish();
             /*//checking if sharedPreferences file exists
             if (sharpref) {
                 Log.i(TAG, "SharePref contains username and password");
