@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.azvk.nationalhockeyteams.Generator;
 import com.azvk.nationalhockeyteams.client.RostersClient;
+import com.azvk.nationalhockeyteams.interfaces.RosterViewInterface;
 import com.azvk.nationalhockeyteams.interfaces.RostersInterface;
 import com.azvk.nationalhockeyteams.models.Roster;
 
@@ -13,12 +14,34 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import rx.Observable;
+import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class RostersPresenter implements RostersInterface.ViewPresenter {
+public class RosterPresenter extends BasePresenter implements Observer<List<Roster>> {
 
-    private static final String TAG = RostersPresenter.class.getSimpleName();
+    private RosterViewInterface rosterViewInterface;
+
+    public RosterPresenter(RosterViewInterface rosterViewInterface) {
+        this.rosterViewInterface = rosterViewInterface;
+    }
+
+    @Override
+    public void onCompleted() {
+        rosterViewInterface.completed();
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        rosterViewInterface.error(e.getMessage());
+    }
+
+    @Override
+    public void onNext(List<Roster> rosters) {
+
+    }
+
+    /*private static final String TAG = RostersPresenter.class.getSimpleName();
     private RostersInterface.PresenterView view;
     private List<Roster> rosterList;
     private Realm realm;
@@ -73,5 +96,5 @@ public class RostersPresenter implements RostersInterface.ViewPresenter {
         realm = Realm.getDefaultInstance();
         rosterList = realm.where(Roster.class).findAll();
         view.returnRostersDB(rosterList);
-    }
+    }*/
 }
