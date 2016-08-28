@@ -1,3 +1,4 @@
+/*
 package com.azvk.nationalhockeyteams.fragments;
 
 import android.os.Bundle;
@@ -85,3 +86,4 @@ public class TeamDescriptionFragment extends Fragment implements TeamInterface.S
         this.team = team;
     }
 }
+*/

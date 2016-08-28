@@ -1,3 +1,4 @@
+/*
 package com.azvk.nationalhockeyteams.activities;
 
 import android.app.Application;
@@ -33,20 +34,24 @@ public class SplashActivity extends AppCompatActivity implements TeamInterface.R
         int splash_time_out = 3000;
 
 
-        /*this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        */
+/*this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_splash);
 
         TeamInterface.RequestDB requestDB = new TeamPresenter(this, this);
         requestDB.isDBExists();
-        requestDB.checkSharePref();*/
+        requestDB.checkSharePref();*//*
+
 
         new Handler().postDelayed(() -> {
             Intent i = new Intent(SplashActivity.this, TeamInfoActivity.class);
             i.putExtra("team", team);
             startActivity(i);
             finish();
-            /*//checking if sharedPreferences file exists
+            */
+/*//*
+/checking if sharedPreferences file exists
             if (sharpref) {
                 Log.i(TAG, "SharePref contains username and password");
                 Intent i = new Intent(SplashActivity.this, TeamInfoActivity.class);
@@ -58,7 +63,8 @@ public class SplashActivity extends AppCompatActivity implements TeamInterface.R
                 Intent i = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(i);
                 finish();
-            }*/
+            }*//*
+
         }, splash_time_out);
     }
 
@@ -74,3 +80,4 @@ public class SplashActivity extends AppCompatActivity implements TeamInterface.R
         this.sharpref = sharpref;
     }
 }
+*/

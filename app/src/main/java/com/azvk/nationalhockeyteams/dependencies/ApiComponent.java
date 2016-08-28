@@ -1,9 +1,6 @@
 package com.azvk.nationalhockeyteams.dependencies;
 
 import com.azvk.nationalhockeyteams.activities.MainActivity;
-import com.azvk.nationalhockeyteams.activities.SplashActivity;
-import com.azvk.nationalhockeyteams.fragments.LoginFragment;
-
 import dagger.Component;
 
 @CustomScope

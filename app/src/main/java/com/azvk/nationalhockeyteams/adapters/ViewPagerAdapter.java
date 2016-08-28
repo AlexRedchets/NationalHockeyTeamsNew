@@ -1,3 +1,4 @@
+/*
 package com.azvk.nationalhockeyteams.adapters;
 
 import android.support.v4.app.Fragment;
@@ -36,4 +37,4 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         else
             return "PLAYERS";
     }
-}
+}*/

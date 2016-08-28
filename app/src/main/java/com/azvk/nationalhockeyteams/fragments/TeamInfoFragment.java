@@ -1,3 +1,4 @@
+/*
 package com.azvk.nationalhockeyteams.fragments;
 
 import android.os.Bundle;
@@ -21,3 +22,4 @@ public class TeamInfoFragment extends Fragment{
         return inflater.inflate(R.layout.fragment_team_info, container, false);
     }
 }
+*/

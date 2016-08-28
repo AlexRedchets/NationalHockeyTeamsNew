@@ -1,3 +1,4 @@
+/*
 package com.azvk.nationalhockeyteams.activities;
 
 import android.content.Context;
@@ -124,4 +125,4 @@ public class TeamInfoActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-}
+}*/

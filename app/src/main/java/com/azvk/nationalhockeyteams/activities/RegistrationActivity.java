@@ -1,3 +1,4 @@
+/*
 package com.azvk.nationalhockeyteams.activities;
 
 import android.os.Bundle;
@@ -20,3 +21,4 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.azvk.nationalhockeyteams.fragments;
 
 import android.content.Intent;
@@ -122,4 +123,4 @@ public class TeamListFragment extends Fragment implements TeamInterface.TeamList
         startActivity(intent);
         getActivity().finish();
     }
-}
+}*/

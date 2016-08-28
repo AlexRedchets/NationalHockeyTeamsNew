@@ -1,3 +1,4 @@
+/*
 package com.azvk.nationalhockeyteams.fragments;
 
 import android.content.Intent;
@@ -112,3 +113,4 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
         Toast.makeText(getContext(), "Enable to connect server. Try later", Toast.LENGTH_LONG).show();
     }
 }
+*/

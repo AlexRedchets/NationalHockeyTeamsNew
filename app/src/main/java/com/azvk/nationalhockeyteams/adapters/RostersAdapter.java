@@ -23,9 +23,11 @@ public class RostersAdapter extends RecyclerView.Adapter<RostersAdapter.ViewHold
     private List<Roster> listRosters;
     private Context context;
     private String TAG = RostersAdapter.class.getSimpleName();
+    private RosterClickListener rosterClickListener;
 
-    public RostersAdapter(Context context) {
+    public RostersAdapter(Context context, RosterClickListener rosterClickListener) {
         this.context = context;
+        this.rosterClickListener = rosterClickListener;
     }
 
     public void updateAdapter(List<Roster> lists){
@@ -69,16 +71,28 @@ public class RostersAdapter extends RecyclerView.Adapter<RostersAdapter.ViewHold
     }
 
 
-    protected static class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @BindView(R.id.player_name)
         TextView playerName;
         @BindView(R.id.player_image)
         ImageView playerImage;
 
-        private ViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            rosterClickListener.onClick(listRosters.get(getAdapterPosition()).getName());
+        }
+    }
+
+    public interface RosterClickListener {
+
+        void onClick(String name);
     }
 
 }

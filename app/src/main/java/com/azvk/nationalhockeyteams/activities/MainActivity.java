@@ -24,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observable;
 
-public class MainActivity extends AppCompatActivity implements RosterViewInterface {
+public class MainActivity extends AppCompatActivity implements RosterViewInterface, RostersAdapter.RosterClickListener {
 
     @Inject
     RostersClient rostersClient;
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements RosterViewInterfa
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        rostersAdapter = new RostersAdapter(this) ;
+        rostersAdapter = new RostersAdapter(this, this) ;
         recyclerView.setAdapter(rostersAdapter);
     }
 
@@ -100,5 +100,10 @@ public class MainActivity extends AppCompatActivity implements RosterViewInterfa
     @Override
     public Observable<List<Roster>> getRosters() {
         return rostersClient.getRosters("Russia");
+    }
+
+    @Override
+    public void onClick(String name) {
+        Toast.makeText(this, "You clicked on " + name, Toast.LENGTH_SHORT).show();
     }
 }

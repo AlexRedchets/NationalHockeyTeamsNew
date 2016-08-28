@@ -34,13 +34,13 @@
             android:name=".activities.SplashActivity"
             android:launchMode="singleTop"
             android:theme="@style/MyMaterialThemeNoActionBar">
-            <intent-filter>
-            </intent-filter>
         </activity>
         <activity android:name=".activities.MainActivity">
+            <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
