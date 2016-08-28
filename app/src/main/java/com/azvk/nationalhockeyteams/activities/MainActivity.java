@@ -1,10 +1,12 @@
 package com.azvk.nationalhockeyteams.activities;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.azvk.nationalhockeyteams.NHTApplication;
 import com.azvk.nationalhockeyteams.R;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements RosterViewInterfa
 
     private RosterPresenter rosterPresenter;
     private RostersAdapter rostersAdapter;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,29 +62,39 @@ public class MainActivity extends AppCompatActivity implements RosterViewInterfa
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        rostersAdapter = new RostersAdapter(this) ;
         recyclerView.setAdapter(rostersAdapter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
         rosterPresenter.onResume();
         rosterPresenter.fetchRoster();
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setTitle("Downolading");
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
     }
 
     @Override
     public void onCompleted() {
-
+        progressDialog.dismiss();
     }
 
     @Override
     public void onError(String message) {
-
+        progressDialog.dismiss();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onRoster(List<Roster> rosters) {
-
+        rostersAdapter.updateAdapter(rosters);
     }
 
     @Override
