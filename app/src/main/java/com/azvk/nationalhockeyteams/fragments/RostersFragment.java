@@ -1,3 +1,4 @@
+/*
 package com.azvk.nationalhockeyteams.fragments;
 
 import android.os.Bundle;
@@ -52,7 +53,7 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         recyclerView.setAdapter(rostersAdapter);
 
         //get info from database
-        viewPresenter = new RostersPresenter(this, getContext());
+        //viewPresenter = new RostersPresenter(this, getContext());
         viewPresenter.getRosterDB();
 
 
@@ -124,4 +125,4 @@ public class RostersFragment extends Fragment implements RostersInterface.Presen
         Log.i(TAG, "Getting rosters: server ERROR");
         Toast.makeText(getContext(), "Enable to connect server. Try later", Toast.LENGTH_LONG).show();
     }
-}
+}*/
