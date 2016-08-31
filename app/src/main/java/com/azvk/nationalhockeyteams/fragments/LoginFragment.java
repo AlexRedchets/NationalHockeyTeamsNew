@@ -1,4 +1,3 @@
-/*
 package com.azvk.nationalhockeyteams.fragments;
 
 import android.content.Intent;
@@ -15,11 +14,9 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.azvk.nationalhockeyteams.Navigator;
-import com.azvk.nationalhockeyteams.activities.TeamInfoActivity;
+import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.interfaces.UserInterface;
 import com.azvk.nationalhockeyteams.presenters.LoginPresenter;
-import com.azvk.nationalhockeyteams.R;
-import com.azvk.nationalhockeyteams.activities.RegistrationActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,8 +78,8 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
     @OnClick(R.id.signup_button_login)
     void registration(View view){
         Log.i(TAG, "Running registration method");
-        Intent intent = new Intent(getContext(), RegistrationActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(getContext(), RegistrationActivity.class);
+        //startActivity(intent);
     }
 
     private boolean isValid(EditText inputName, EditText inputPassword) {
@@ -95,8 +92,8 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
             Log.i(TAG, "Authorization: Success");
             Toast.makeText(getContext(), "User found", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(getContext(), TeamInfoActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(getContext(), TeamInfoActivity.class);
+            //startActivity(intent);
             getActivity().finish();
         }
         else {
@@ -113,4 +110,3 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
         Toast.makeText(getContext(), "Enable to connect server. Try later", Toast.LENGTH_LONG).show();
     }
 }
-*/

@@ -1,3 +1,4 @@
+/*
 package com.azvk.nationalhockeyteams.presenters;
 
 import com.azvk.nationalhockeyteams.activities.MainActivity;
@@ -12,3 +13,4 @@ import dagger.Component;
 public interface RosterComponent {
     void inject(MainActivity activity);
 }
+*/
