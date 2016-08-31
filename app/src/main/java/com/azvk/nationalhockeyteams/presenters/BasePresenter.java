@@ -1,5 +1,9 @@
 package com.azvk.nationalhockeyteams.presenters;
 
+import com.azvk.nationalhockeyteams.Generator;
+import com.azvk.nationalhockeyteams.client.RostersClient;
+import com.azvk.nationalhockeyteams.client.UserClient;
+
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -46,6 +50,7 @@ public abstract class BasePresenter implements Presenter {
     }
 
     protected <F> void subscribe (Observable<F> observable, Observer<F> observer){
+
         Subscription subscription = observable
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

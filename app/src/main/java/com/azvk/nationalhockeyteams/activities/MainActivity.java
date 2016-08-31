@@ -1,17 +1,13 @@
+/*
 package com.azvk.nationalhockeyteams.activities;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
-import com.azvk.nationalhockeyteams.NHTApplication;
 import com.azvk.nationalhockeyteams.R;
 import com.azvk.nationalhockeyteams.adapters.RostersAdapter;
-import com.azvk.nationalhockeyteams.client.RostersClient;
 import com.azvk.nationalhockeyteams.interfaces.RosterViewInterface;
 import com.azvk.nationalhockeyteams.models.Roster;
 import com.azvk.nationalhockeyteams.presenters.RosterPresenter;
@@ -21,17 +17,17 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import rx.Observable;
 
-public class MainActivity extends AppCompatActivity implements RosterViewInterface, RostersAdapter.RosterClickListener {
+public class MainActivity extends AppCompatActivity implements RosterViewInterface {
 
-    @Inject
-    RostersClient rostersClient;
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     @BindView(R.id.rosterts_recycle_view)
     RecyclerView recyclerView;
+    @Inject
+    RosterPresenter rosterPresenter;
 
-    private RosterPresenter rosterPresenter;
     private RostersAdapter rostersAdapter;
     private ProgressDialog progressDialog;
 
@@ -40,21 +36,47 @@ public class MainActivity extends AppCompatActivity implements RosterViewInterfa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        resolveDependencies();
+        //resolveDependencies();
 
-        configView();
+        */
+/*configView();
 
         rosterPresenter = new RosterPresenter(this);
-        rosterPresenter.onCreate();
+        rosterPresenter.onCreate();*//*
+
     }
 
-    private void resolveDependencies() {
-        ((NHTApplication)getApplication())
-                .getApiComponent()
-                .inject(this);
+    */
+/*private void resolveDependencies() {
+        DaggerRosterComponent.builder()
+                .netComponent(((App)getApplicationContext()).getNetComponent())
+                .rosterModule(new RosterModule(this))
+                .build().inject(this);
+    }*//*
+
+
+    @Override
+    public void onCompleted() {
+
     }
 
-    private void configView() {
+    @Override
+    public void onError(String message) {
+
+    }
+
+    @Override
+    public void onRoster(List<Roster> rosters) {
+
+    }
+
+    @Override
+    public Observable<List<Roster>> getRosters() {
+        return null;
+    }
+
+   */
+/* private void configView() {
         ButterKnife.bind(this);
 
         recyclerView.setRecycledViewPool(new RecyclerView.RecycledViewPool());
@@ -83,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements RosterViewInterfa
 
     @Override
     public void onCompleted() {
+        Log.i(TAG, "onCompleted started");
         progressDialog.dismiss();
     }
 
@@ -105,5 +128,7 @@ public class MainActivity extends AppCompatActivity implements RosterViewInterfa
     @Override
     public void onClick(String name) {
         Toast.makeText(this, "You clicked on " + name, Toast.LENGTH_SHORT).show();
-    }
+    }*//*
+
 }
+*/

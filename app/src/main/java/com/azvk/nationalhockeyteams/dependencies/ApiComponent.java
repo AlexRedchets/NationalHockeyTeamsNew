@@ -1,3 +1,4 @@
+/*
 package com.azvk.nationalhockeyteams.dependencies;
 
 import com.azvk.nationalhockeyteams.activities.MainActivity;
@@ -10,3 +11,4 @@ public interface ApiComponent {
     void inject(MainActivity activity);
 
 }
+*/

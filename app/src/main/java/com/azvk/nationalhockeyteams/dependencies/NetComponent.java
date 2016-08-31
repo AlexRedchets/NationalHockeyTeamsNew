@@ -6,7 +6,7 @@ import dagger.Component;
 import retrofit2.Retrofit;
 
 @Singleton
-@Component(modules = NetModule.class)
+@Component(modules = {AppModule.class, NetModule.class})
 public interface NetComponent {
 
     Retrofit retrofit();

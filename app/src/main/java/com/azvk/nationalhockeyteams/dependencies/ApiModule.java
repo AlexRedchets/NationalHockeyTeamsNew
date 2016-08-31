@@ -1,3 +1,4 @@
+/*
 package com.azvk.nationalhockeyteams.dependencies;
 
 import com.azvk.nationalhockeyteams.client.RostersClient;
@@ -16,3 +17,4 @@ public class ApiModule {
         return retrofit.create(RostersClient.class);
     }
 }
+*/
