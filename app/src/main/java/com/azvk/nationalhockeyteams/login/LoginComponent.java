@@ -5,5 +5,5 @@ import dagger.Subcomponent;
 @LoginScope
 @Subcomponent(modules = LoginModule.class)
 public interface LoginComponent {
-    LoginFragment plus (LoginFragment fragment);
+    LoginFragment inject (LoginFragment fragment);
 }

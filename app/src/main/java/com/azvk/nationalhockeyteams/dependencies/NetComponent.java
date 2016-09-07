@@ -11,5 +11,5 @@ import retrofit2.Retrofit;
 @Singleton
 @Component(modules = {AppModule.class, NetModule.class})
 public interface NetComponent {
-    LoginComponent inject (LoginModule module);
+    LoginComponent plus (LoginModule module);
 }

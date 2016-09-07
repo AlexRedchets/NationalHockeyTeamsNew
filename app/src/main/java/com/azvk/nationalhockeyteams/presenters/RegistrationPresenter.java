@@ -1,3 +1,4 @@
+/*
 package com.azvk.nationalhockeyteams.presenters;
 
 import android.content.Context;
@@ -68,3 +69,4 @@ public class RegistrationPresenter implements LoginPresenter.LoginInterface.Regi
         editor.apply();
     }
 }
+*/

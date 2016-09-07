@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.azvk.nationalhockeyteams.App;
 import com.azvk.nationalhockeyteams.Navigator;
 import com.azvk.nationalhockeyteams.R;
 
@@ -40,10 +41,15 @@ public class LoginFragment extends Fragment implements LoginInterface.View {
         Log.i(TAG, "onCreateView started");
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        ButterKnife.bind(this, view);
-        progressBar.setVisibility(ProgressBar.INVISIBLE);
+        configView(view);
 
         return view;
+    }
+
+    private void configView(View view) {
+        ((App)getActivity().getApplicationContext()).getLoginComponent(this).inject(this);
+        ButterKnife.bind(this, view);
+        progressBar.setVisibility(ProgressBar.INVISIBLE);
     }
 
     @OnClick(R.id.login_button)
@@ -108,4 +114,10 @@ public class LoginFragment extends Fragment implements LoginInterface.View {
         Log.i(TAG, "Authorization: Server error");
         Toast.makeText(getContext(), "Enable to connect server. Try later", Toast.LENGTH_LONG).show();
     }*/
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ((App)getActivity().getApplicationContext()).releaseLoginComponent();
+    }
 }

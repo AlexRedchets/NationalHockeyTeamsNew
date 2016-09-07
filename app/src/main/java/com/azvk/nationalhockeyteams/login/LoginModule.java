@@ -15,7 +15,7 @@ public class LoginModule {
     }
 
     @Provides
-    @Singleton
+    @LoginScope
     LoginInterface.View provideLoginInterfaceView(){
         return view;
     }
