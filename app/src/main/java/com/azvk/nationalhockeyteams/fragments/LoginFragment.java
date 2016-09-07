@@ -1,6 +1,5 @@
 package com.azvk.nationalhockeyteams.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -15,16 +14,19 @@ import android.widget.Toast;
 
 import com.azvk.nationalhockeyteams.Navigator;
 import com.azvk.nationalhockeyteams.R;
-import com.azvk.nationalhockeyteams.interfaces.UserInterface;
+import com.azvk.nationalhockeyteams.interfaces.LoginInterface;
 import com.azvk.nationalhockeyteams.presenters.LoginPresenter;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginFragment extends Fragment implements UserInterface.LoginPresenterView {
+public class LoginFragment extends Fragment implements LoginInterface.View {
 
-    private  static final String TAG = LoginFragment.class.getSimpleName();
+    @Inject
+    LoginPresenter presenter;
     @BindView(R.id.input_name_login)
     EditText inputName;
     @BindView(R.id.input_password_login)
@@ -32,7 +34,7 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
     @BindView(R.id.login_progress_bar)
     ProgressBar progressBar;
 
-    public LoginFragment() {}
+    private  static final String TAG = LoginFragment.class.getSimpleName();
 
     @Nullable
     @Override
@@ -57,15 +59,14 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
             if(navigator.isNetworkAvailable()){
                 //if there is internet connection
                 progressBar.setVisibility(ProgressBar.VISIBLE);
-                UserInterface.LoginViewPresenter viewPresenter = new LoginPresenter(this, getContext());
-                viewPresenter.loginUser(inputName.getText().toString(), inputPassword.getText().toString());}
+                presenter.loginUser(inputName.getText().toString(), inputPassword.getText().toString());}
             else{
                 //if there is not internet connection
                 Log.i(TAG, "No internet connection");
                 Snackbar.make(view, R.string.network_error,
                         Snackbar.LENGTH_SHORT)
                         .show();
-            }
+        }
         }
         else{
             Log.i(TAG, "login and password are NOT valid");
@@ -103,10 +104,15 @@ public class LoginFragment extends Fragment implements UserInterface.LoginPresen
         }
     }
 
-    @Override
+    /*@Override
     public void errorServer(String error) {
         progressBar.setVisibility(ProgressBar.INVISIBLE);
         Log.i(TAG, "Authorization: Server error");
         Toast.makeText(getContext(), "Enable to connect server. Try later", Toast.LENGTH_LONG).show();
+    }*/
+
+    @Override
+    public void loginUser(String username, String password) {
+
     }
 }

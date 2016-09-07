@@ -1,7 +1,5 @@
 package com.azvk.nationalhockeyteams.dependencies;
 
-import android.app.Application;
-
 import javax.inject.Singleton;
 
 import dagger.Module;

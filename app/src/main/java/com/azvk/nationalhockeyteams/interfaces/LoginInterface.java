@@ -1,8 +1,8 @@
 package com.azvk.nationalhockeyteams.interfaces;
 
-public interface UserInterface {
+public interface LoginInterface {
 
-    interface LoginViewPresenter{
+    interface View{
         void loginUser(String username, String password);
     }
 

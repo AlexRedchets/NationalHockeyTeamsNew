@@ -6,25 +6,27 @@ import android.util.Log;
 
 import com.azvk.nationalhockeyteams.Generator;
 import com.azvk.nationalhockeyteams.client.UserClient;
-import com.azvk.nationalhockeyteams.interfaces.UserInterface;
+import com.azvk.nationalhockeyteams.interfaces.LoginInterface;
 import com.azvk.nationalhockeyteams.models.User;
 
+import javax.inject.Inject;
+
+import retrofit2.Retrofit;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static java.security.AccessController.getContext;
 
-
-public class LoginPresenter implements UserInterface.LoginViewPresenter{
+public class LoginPresenter implements LoginInterface.LoginViewPresenter{
 
     private static final String TAG = LoginPresenter.class.getSimpleName();
-    private UserInterface.LoginPresenterView view;
-    private Context context;
+    private Retrofit retrofit;
+    private LoginInterface.View view;
 
-    public LoginPresenter(UserInterface.LoginPresenterView view, Context context) {
+    @Inject
+    public LoginPresenter(Retrofit retrofit, LoginInterface.View view) {
+        this.retrofit = retrofit;
         this.view = view;
-        this.context = context;
     }
 
     public void loginUser(String username, String password) {

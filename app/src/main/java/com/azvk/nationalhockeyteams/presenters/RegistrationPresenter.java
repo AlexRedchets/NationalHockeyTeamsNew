@@ -6,20 +6,20 @@ import android.util.Log;
 
 import com.azvk.nationalhockeyteams.Generator;
 import com.azvk.nationalhockeyteams.client.UserClient;
-import com.azvk.nationalhockeyteams.interfaces.UserInterface;
+import com.azvk.nationalhockeyteams.interfaces.LoginInterface;
 import com.azvk.nationalhockeyteams.models.User;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class RegistrationPresenter implements UserInterface.RegistrationViewPresenter{
+public class RegistrationPresenter implements LoginInterface.RegistrationViewPresenter{
 
     private static final String TAG = RegistrationPresenter.class.getSimpleName();
-    private UserInterface.RegistrationPresenterView view;
+    private LoginInterface.RegistrationPresenterView view;
     private Context context;
 
-    public RegistrationPresenter(UserInterface.RegistrationPresenterView view, Context context) {
+    public RegistrationPresenter(LoginInterface.RegistrationPresenterView view, Context context) {
         this.view = view;
         this.context = context;
     }
