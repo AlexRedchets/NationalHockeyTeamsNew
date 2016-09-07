@@ -16,8 +16,15 @@
             android:name=".activities.LoginActivity"
             android:launchMode="singleTop"
             android:theme="@style/MyMaterialThemeNoActionBar"
-            android:windowSoftInputMode="stateHidden|adjustUnspecified" />
-        <activity
+            android:windowSoftInputMode="stateHidden|adjustUnspecified">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--<activity
             android:name=".activities.RegistrationActivity"
             android:label="@string/registration_activity_title"
             android:parentActivityName=".activities.LoginActivity"
@@ -35,13 +42,8 @@
             android:launchMode="singleTop"
             android:theme="@style/MyMaterialThemeNoActionBar">
         </activity>
-        <activity android:name=".activities.MainActivity">
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".activities.MainActivity"/>-->
 
-            <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

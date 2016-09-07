@@ -1,6 +1,4 @@
-package com.azvk.nationalhockeyteams.dependencies;
-
-import com.azvk.nationalhockeyteams.interfaces.LoginInterface;
+package com.azvk.nationalhockeyteams.login;
 
 import javax.inject.Singleton;
 

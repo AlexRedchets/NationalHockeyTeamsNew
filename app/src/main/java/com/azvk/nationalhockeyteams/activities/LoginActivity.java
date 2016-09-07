@@ -3,7 +3,7 @@ package com.azvk.nationalhockeyteams.activities;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.azvk.nationalhockeyteams.fragments.LoginFragment;
+import com.azvk.nationalhockeyteams.login.LoginFragment;
 import com.azvk.nationalhockeyteams.R;
 
 public class LoginActivity extends AppCompatActivity {

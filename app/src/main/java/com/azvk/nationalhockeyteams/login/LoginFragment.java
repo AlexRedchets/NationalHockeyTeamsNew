@@ -1,4 +1,4 @@
-package com.azvk.nationalhockeyteams.fragments;
+package com.azvk.nationalhockeyteams.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import com.azvk.nationalhockeyteams.Navigator;
 import com.azvk.nationalhockeyteams.R;
-import com.azvk.nationalhockeyteams.interfaces.LoginInterface;
-import com.azvk.nationalhockeyteams.presenters.LoginPresenter;
 
 import javax.inject.Inject;
 
@@ -110,9 +108,4 @@ public class LoginFragment extends Fragment implements LoginInterface.View {
         Log.i(TAG, "Authorization: Server error");
         Toast.makeText(getContext(), "Enable to connect server. Try later", Toast.LENGTH_LONG).show();
     }*/
-
-    @Override
-    public void loginUser(String username, String password) {
-
-    }
 }

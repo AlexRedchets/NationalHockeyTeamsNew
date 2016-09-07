@@ -1,6 +1,5 @@
 package com.azvk.nationalhockeyteams.presenters;
 
-import com.azvk.nationalhockeyteams.dependencies.CustomScope;
 import com.azvk.nationalhockeyteams.interfaces.RosterViewInterface;
 
 import dagger.Module;
